@@ -107,6 +107,6 @@ const unknownPath = (req, res) => {
 
 app.use(unknownPath);
 
-app.listen(3001, () => {
+app.listen(80, () => {
     console.log('server running at port 3001...');
 });

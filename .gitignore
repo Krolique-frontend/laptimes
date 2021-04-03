@@ -16,7 +16,6 @@
 /models
 /controllers
 /routes
-/utils
 /views
 app.js
 .DS_Store
@@ -26,7 +25,6 @@ app.js
 .env.production.local
 *.csv
 *.xlsx
-csvToJSON.js
 
 npm-debug.log*
 yarn-debug.log*
