@@ -1,5 +1,7 @@
 'use strict';
 
+console.time('script initialisation time');
+
 const fs = require('fs');
 const cors = require('cors');
 const url = require('url');
@@ -12,8 +14,57 @@ const Converter = require('./utils/csvToJSON');
 
 app.use(cors());
 app.use(express.static('public/www'));
+app.use(handleRequest);
+
+async function handleRequest(req, res, next) {
+
+    const method = req.method;
+    const pathname = url.parse(req.url, true).pathname;
+    const query = url.parse(req.url, true).query;
+
+    let field, fieldValue;
+
+    if (!!Object.keys(query).length) {
+        for (let key in query) {
+            field = key;
+            fieldValue = query[key];
+        }
+    }
+
+    console.log(`get request with params ${field} ${fieldValue}`);
+
+    if (method === 'GET' && pathname === '/initialtable' || pathname === '/event' || pathname === '/car') {
+
+        await fetchTable(field, fieldValue)
+            .then(data => {
+                res.set({'content-type': 'application/json; charset=utf-8'});
+                res.json(data);
+            })
+            .catch(err => console.log('fetchtableError', err));
+    } else {
+        await res.status(404).send({error: 'no such page/resource'});
+    }
+
+    if (method === 'POST') {
+        switch (pathname) {
+            case '/convert-csv':
+                const converter = new Converter('../laptimes-ua/brd_2018_09_22.csv');
+                converter.convert();
+                res.send('converted');
+                break;
+
+            case '/writetabletodb':
+                const data = JSON.parse(fs.readFileSync("dbJSON.json"));
+                addNewData(data);
+                res.send('Данные внесены в базу... но это не точно.');
+                break;
+        }
+    }
+    next();
+}
 
 async function fetchTable(f, v) {
+
     let field = f ? f : 'track';
     let value = v ? v : '6km Classic';
     const data = new DbConfig().selectString(field, value);
@@ -59,54 +110,8 @@ async function addNewData(newData) {
     await connection.end();
 }
 
-const urlWare = async (req, res, next) => {
-    const method = req.method;
-    const pathname = url.parse(req.url, true).pathname;
-    const query = url.parse(req.url, true).query;
-
-    let field, fieldValue;
-
-    if (!!Object.keys(query).length) {
-        for (let key in query) {
-            field = key;
-            fieldValue = query[key];
-        }
-    }
-
-    console.log(`get request with params ${field} ${fieldValue}`);
-
-    if (method === 'GET' && pathname === '/initialtable' || pathname === '/event' || pathname === '/car') {
-        await res.set({'content-type': 'application/json; charset=utf-8'});
-        await fetchTable(field, fieldValue).then(data => res.json(data));
-    }
-
-    if (method === 'POST') {
-        switch (pathname) {
-            case '/convert-csv':
-                const converter = new Converter('../laptimes-ua/brd_2018_09_22.csv');
-                converter.convert();
-                res.send('converted');
-                break;
-
-            case '/writetabletodb':
-                const data = JSON.parse(fs.readFileSync("dbJSON.json"));
-                addNewData(data);
-                res.send('Данные внесены в базу... но это не точно.');
-                break;
-        }
-    }
-
-    await next();
-};
-
-app.use(urlWare);
-
-const unknownPath = (req, res) => {
-    res.status(404).send({error: 'no such page/resource'});
-};
-
-app.use(unknownPath);
-
-app.listen(80, () => {
+app.listen(3001, () => {
     console.log('server running at port 3001...');
 });
+
+console.timeEnd('script initialisation time');

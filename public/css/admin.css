@@ -1,0 +1,253 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+ul {
+    list-style: none;
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.flexCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.tab {
+    display: none;
+}
+
+.tab.active {
+    display: flex;
+}
+
+.button {
+    padding: 5px 10px;
+    text-transform: uppercase;
+    font-size: 1em;
+    background: #dca407;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    transition: all 0.1s ease-in-out;
+}
+
+.button:focus {
+    outline: none;
+}
+
+.button:active {
+    transform: scale(0.95);
+}
+
+body {
+    padding: 0 20px;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    font-weight: bold;
+    background: #4800dc;
+}
+
+.header .navTabs {
+    width: inherit;
+}
+
+.header .navTabs .list {
+    justify-content: space-around;
+}
+
+.header .navTabs .list .listItem .navLink {
+    display: block;
+    padding: 10px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    border: 2px solid #821e1e;
+    background: #821e1e;
+    border-radius: 4px;
+    box-shadow: #0b0b0b 0 2px 20px 10px;
+    transition: all 0.1s ease-in;
+}
+
+.header .navTabs .list .listItem .navLink.active {
+    background: #007d1a;
+    border-color: #007d1a;
+}
+
+.header .navTabs .list .listItem .navLink:focus {
+    transform: scale(0.95);
+}
+
+main {
+    padding: 100px 0;
+}
+
+#accessPoint {
+    position: fixed;
+    background: #000;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+
+    display: none;
+}
+
+#accessPoint #loginForm {
+    color: #0cff3f;
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-size: 1.5em;
+}
+
+#accessPoint #loginForm .accessLabel {
+    font-family: 'VT323', monospace;
+}
+
+#accessPoint #loginForm .accessInput {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #0cff3f;
+    margin-left: 5px;
+    font-family: 'VT323', monospace;
+    font-size: 1em;
+}
+
+#accessPoint #loginForm #password {
+    color: transparent;
+}
+
+/* ------------------------------------ status tab ------------------------------------ */
+#statusForm {
+    flex: 0 1 100%;
+    margin-top: 60px;
+}
+
+#statusForm #statusButton {
+    position: fixed;
+    top: 87px;
+    right: 10%;
+}
+
+#statusForm .adminkaHeader {
+    position: fixed;
+    top: 85px;
+    left: 0;
+    background: #a1a1a1;
+    display: grid;
+    grid-template-columns: 5% 35% 15% 15% 30%;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#statusForm .pilot {
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 5% 35% 15% 15% 30%;
+}
+
+#statusForm .pilot .car:before {
+    content: '';
+    display: inline-block;
+    margin-right: 4px;
+    padding: 5px;
+    background: red;
+    border-radius: 50px;
+}
+
+#statusForm .pilot .inputs {
+    display: inline-block;
+}
+
+#statusForm .pilot .inputs label {
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+#statusForm .pilot .inputs input {
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+#statusForm .pilot .times .time {
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+/* ------------------------------------ racer tab ------------------------------------ */
+#racersData {
+    justify-content: space-between;
+    width: 100%;
+}
+
+#racersData #racerForm {
+    width: 100%;
+    max-width: 450px;
+    flex-wrap: wrap;
+}
+
+#racersData #racerForm .dataLabel {
+    margin-bottom: 10px;
+    flex: 0 1 30%;
+}
+
+#racersData #racerForm .dataInput {
+    flex: 0 1 70%;
+    padding: 5px;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#racersData #racerForm .dataSelect {
+    margin-bottom: 10px;
+    display: block;
+    flex: 0 1 70%;
+    font-size: 20px;
+    padding: 5px;
+}
+
+#racersData #racerForm #racerButton {
+    position: relative;
+    left: 50%;
+    top: 0;
+}
+
+#pilotsArr {
+    position: relative;
+    flex: 0 1 50%;
+}
+
+#pilotsArr #jsonMonitor {
+    width: inherit;
+    padding: 10px;
+    border: 1px solid blueviolet;
+    border-radius: 4px;
+    max-height: 400px;
+    overflow: auto;
+}
+
+#pilotsArr #sendJSON {
+    position: relative;
+    left: 50%;
+    top: 5%;
+}
