@@ -1,0 +1,124 @@
+html
+    head
+        meta(charset='utf-8')
+        meta(
+            name='viewport'
+            content='width=device-width, initial-scale=1.0'
+        )
+        link(rel="preconnect" href="https://fonts.gstatic.com")
+        link(href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet")
+        link(
+            rel='stylesheet'
+            href='/static/css/admin/admin.css'
+        )
+        title Laptimes admin
+    body
+        header(class='header')
+            nav(class="navTabs")
+                ul(class="list flexRow")
+                    li(class="listItem")
+                        a(class="navLink" href="#status") Статусы и времена
+                    li(class="listItem")
+                        a(class="navLink active" href="#racersData") Инфа о гонщиках
+        main
+            div(id="accessPoint")
+                form(id="loginForm" name="login")
+                    label(class="accessLabel") / $login>
+                    input(
+                        type="text"
+                        class="accessInput"
+                        id="login"
+                        autocomplete="off"
+                        autofocus="autofocus"
+                        tabindex="1"
+                        required
+                        )
+                    br
+                    label(class="accessLabel") / $password>
+                    input(type="text" class="accessInput" id="password" autocomplete="off" required)
+            section(id="status" class="tab")
+                form(id='statusForm' name='adminka')
+                    div(class="adminkaHeader")
+                        span №
+                        span Имя
+                        span тачка
+                        span статус
+                        span времена
+                    each item in data
+                        div(class='pilot')
+                            span= item.number
+                            span= item.pilot
+                            span(class='car')= item.model
+                            div(class='inputs')
+                                label Дубасит
+                                input(type='radio' name='' + item.pilot value='session')
+                                br
+                                label готовится
+                                input(type='radio' name='' + item.pilot value='standby')
+                                br
+                                label техпарк
+                                input(type='radio' name='' + item.pilot value='park' checked)
+                            div(class='times flexCol')
+                                input(
+                                    class='time'
+                                    type='text'
+                                    name='time1'
+                                    data-name='' + item.pilot
+                                    placeholder='время1'
+                                    )
+                                input(
+                                    class='time'
+                                    type='text'
+                                    name='time2'
+                                    data-name='' + item.pilot
+                                    placeholder='время2'
+                                    )
+                                input(
+                                    class='time'
+                                    type='text'
+                                    name='time3'
+                                    data-name='' + item.pilot
+                                    placeholder='общее / лучшее'
+                                    )
+                    button(id='statusButton' class="button") send
+            section(id="racersData" class="tab active")
+                form(id="racerForm" class="flexRow" name="racerAdminka")
+                    label(for="date" class="dataLabel") дата
+                    input(type="text" id="date" class="dataInput" placeholder="dd.MM.yyyy" required)
+                    label(for="event" class="dataLabel") ивент
+                    input(type="text" id="event" class="dataInput" required)
+                    label(for="track" class="dataLabel") трэк
+                    input(type="text" id="track" class="dataInput" required)
+                    label(for="number" class="dataLabel") № участника
+                    input(type="text" id="number" class="dataInput" required)
+                    label(for="pilot" class="dataLabel") Ф.И. (без О.)
+                    input(type="text" id="pilot" class="dataInput" required)
+                    label(for="make" class="dataLabel") тачка
+                    input(type="text" id="make" class="dataInput" required)
+                    label(for="model" class="dataLabel") модель
+                    input(type="text" id="model" class="dataInput" required)
+                    label(for="engine" class="dataLabel") мотор (объем)
+                    input(type="text" id="engine" class="dataInput" required placeholder="4.0")
+                    label(for="aspiration" class="dataLabel") аспиратион
+                    select(id="aspiration" class="dataSelect" required)
+                        option(value="atmo") atmo
+                        option(value="turbo") turbo
+                        option(value="supercharger") supercharger
+                        option(value="electro") electro
+                    label(for="drivetrain" class="dataLabel") Привод
+                    select(id="drivetrain" class="dataSelect" required)
+                        option(value="rwd") rwd
+                        option(value="awd") awd
+                        option(value="fwd") fwd
+                    label(for="tyre" class="dataLabel") резина
+                    input(type="text" id="tyre" class="dataInput" value="нет данных" required)
+                    label(for="class" class="dataLabel") класс
+                    input(type="text" id="class" class="dataInput" required)
+                    label(for="time" class="dataLabel") лучшее время
+                    input(type="text" id="time" class="dataInput" required placeholder="00:50:01")
+                    button(class="button" id="racerButton") добавить
+                aside(id="pilotsArr")
+                    div(id="jsonMonitor")
+                    button(class="button" id="sendJSON") отправить
+        script(src="/static/js/admin/tabs.js")
+        script(src="/static/js/admin/admin.js")
