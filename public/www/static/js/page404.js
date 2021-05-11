@@ -1,0 +1,1 @@
+document.querySelector('.backBtn').onclick = () => window.history.back();

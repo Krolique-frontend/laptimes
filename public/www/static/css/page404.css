@@ -1,0 +1,119 @@
+@font-face {
+    font-family: 'Star Wars';
+    src: url('../fonts/starjedi-webfont.woff2') format('woff2'),
+    url('../fonts/starjedi-webfont.woff') format('woff');
+url('../fonts/Starjedi.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Star Wars Hollow';
+    src: url('../fonts/starjhol-webfont.woff2') format('woff2'),
+    url('../fonts/starjhol-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.bg {
+    width: 100vw;
+    height: 100vh;
+    background: url('../img/starwars-space.jpg');
+}
+
+h1 {
+    display: block;
+    margin: auto auto;
+    max-width: 90%;
+    width: 100%;
+    font-family: 'Star Wars Hollow';
+    font-weight: 400;
+    color: #ffe81f;
+    text-align: center;
+    position: relative;
+    left: 0;
+    top: 30%;
+    font-size: 8em;
+    transform: scale(0);
+
+    animation: title;
+    animation-duration: 13s;
+    animation-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    animation-iteration-count: 1;
+}
+
+.text {
+    display: block;
+    margin: auto auto;
+    max-width: 475px;
+    width: 100%;
+    font-family: 'Star Wars';
+    font-weight: 400;
+    color: #ffe81f;
+    text-align: center;
+    position: relative;
+    font-size: 2em;
+    text-transform: capitalize;
+
+    animation: text;
+    animation-duration: 15s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+
+    transform: perspective(1000px) rotateX(0deg) translateY(50px);
+}
+
+@keyframes title {
+    0% {
+        transform: scale(6);
+    }
+
+    95% {
+        color: #ffe81f;
+        transform: scale(0.05);
+    }
+
+    100% {
+        transform: scale(0.05);
+        color: transparent;
+    }
+}
+
+@keyframes text {
+    0% {
+        transform: perspective(180px) rotateX(45deg) translateY(450px);
+    }
+
+    100% {
+        transform: perspective(1000px) rotateX(0deg) translateY(50px);
+    }
+}
+
+.backBtn {
+    font-family: 'Star Wars';
+    font-weight: 400;
+    font-size: 0.7em;
+    color: #ffe81f;
+    background: transparent;
+    border: 3px solid #ffe81f;
+    padding: 4px 20px;
+    text-transform: capitalize;
+    border-radius: 5px;
+    margin-top: 80px;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+.backBtn:hover {
+    background: #ffe81f;
+    color: #000;
+}
