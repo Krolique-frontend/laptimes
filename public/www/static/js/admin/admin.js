@@ -1,5 +1,6 @@
 "use strict";
-const socket = new WebSocket('ws://localhost:3002');
+const socket = new WebSocket('ws://35.195.249.169:8080/'); // prod gcloud
+// const socket = new WebSocket('ws://localhost:3002/'); // dev
 const login = document.querySelector('#login');
 const password = document.querySelector('#password');
 const loginForm = document.querySelector('#loginForm');

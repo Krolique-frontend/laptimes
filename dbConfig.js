@@ -1,21 +1,22 @@
 class DbConfig {
     constructor(){
         // for db at https://vh366.timeweb.com/
-        // this.connConfig = {
-        //     host: '188.225.40.161',
-        //     port: '3306',
-        //     database: "cq61504_laptimes",
-        //     user: "cq61504_laptimes",
-        //     password: "Baseracedays"
-        // };
-
-        // for local db
         this.connConfig = {
-            host: 'localhost',
-            database: "laptimes",
+            host: '35.205.6.227',
+            port: '3306',
+            database: "laptimes-db",
+            // database: "alltimes",
             user: "root",
             password: "rhjkbret"
         };
+
+        // for local db
+        // this.connConfig = {
+        //     host: 'localhost',
+        //     database: "laptimes",
+        //     user: "root",
+        //     password: "rhjkbret"
+        // };
     }
 
     selectString(selectRow, selectValue) {
