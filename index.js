@@ -300,7 +300,7 @@ async function addNewData(newData) {
     await connection.end();
 }
 
-server.listen(3001, (err) => {
+server.listen(8080, (err) => {
     if (err) throw err;
     console.log('server running at port 3001...');
 });
