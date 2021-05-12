@@ -6,6 +6,13 @@ class DbConfig {
             port: '3306',
             database: "laptimes-db",
             // database: "alltimes",
+        };
+
+        // for db at google.cloud/
+        this.connConfig = {
+            host: '35.205.6.227',
+            port: '3306',
+            database: "alltimes",
             user: "root",
             password: "rhjkbret"
         };
