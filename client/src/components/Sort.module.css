@@ -1,0 +1,151 @@
+.sort {
+    position: fixed;
+    bottom: -150%;
+    left: 0;
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.79);
+    color: #fff;
+    transition: all 0.3s ease-in;
+}
+
+@media(min-width: 992px) {
+    .sort {
+        display: block;
+        position: relative;
+        width: 300px;
+    }
+}
+
+.show {
+    bottom: 0;
+}
+
+.sortButton {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 110px;
+    z-index: 3;
+
+    padding: 15px 20px;
+    border-radius: 50px;
+    background: #000;
+
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+@media(min-width: 992px) {
+    .sortButton {
+        display: none;
+    }
+}
+
+.dropdown {
+    display: flex;
+    justify-content: space-between;
+
+    background: #959595;
+    margin: 5px 0;
+    padding: 5px;
+
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.dropdown:after {
+    content: '+';
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.dropdown.altAfter:after {
+    content: '-';
+}
+
+.list {
+    display: none;
+    transition: all 0.3s ease-in-out;
+    background: #d2d2d2;
+    padding: 0 15px;
+    margin-top: -5px;
+    max-height: 300px;
+    overflow: auto;
+    flex-wrap: wrap;
+}
+
+.item {
+    display: block;
+    padding: 5px 0;
+    margin: 5px 0;
+    color: #000;
+    transition: all 0.1s;
+    letter-spacing: 2px;
+    flex: 0 1 100%;
+}
+
+@media(min-width: 360px) {
+    .item {
+        flex: 0 1 50%;
+    }
+
+    #drivetrain .item {
+        flex: 0 1 33%;
+    }
+}
+
+@media(min-width: 500px) {
+    .item {
+        flex: 0 1 33%;
+    }
+}
+
+#aspiration .item {
+    flex: 0 1 100%;
+}
+
+@media(min-width: 400px) {
+    #aspiration .item {
+        flex: 0 1 50%;
+    }
+}
+
+@media(min-width: 768px) {
+    .item {
+        flex: 0 1 25%;
+    }
+
+    #aspiration .item {
+        flex: 0 1 25%;
+    }
+}
+
+.item:active{
+    background: #e8e8e8;
+}
+
+.item input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+}
+
+.showList {
+    display: flex;
+}
+
+@media(min-width: 992px) {
+    .item,
+    #aspiration .item {
+        flex: 0 1 100%;
+    }
+
+    .showList {
+        display: block;
+    }
+}

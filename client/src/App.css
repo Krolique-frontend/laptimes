@@ -1,0 +1,88 @@
+.header {
+  text-align: center;
+  background: #000;
+  color: #fff;
+  font-size: 10px;
+}
+@media (min-width: 992px) {
+  main {
+    display: flex;
+  }
+}
+.table {
+  width: 90%;
+  margin: 10px auto 80px;
+}
+@media (min-width: 370px) {
+  .table {
+    font-size: 1.15em;
+  }
+}
+@media (min-width: 370px) {
+  .table {
+    font-size: 1.15em;
+  }
+}
+@media (min-width: 992px) {
+  .table {
+    max-width: 600px;
+    max-height: 95vh;
+    overflow: auto;
+    margin: auto;
+  }
+}
+.tableHeader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  border-bottom: solid 1px grey;
+}
+.tableHeader .table__title {
+  flex: 0 1 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.tableHeader .tableHeader__timeHeader {
+  text-decoration: underline;
+  align-self: flex-end;
+  cursor: pointer;
+  display: block;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.mobileNav {
+  display: block;
+}
+@media (min-width: 992px) {
+  .mobileNav {
+    display: none;
+  }
+}
+.desktopNav {
+  display: none;
+}
+@media (min-width: 992px) {
+  .desktopNav {
+    display: block;
+  }
+}
+.routerLink {
+  display: none;
+}
+.todayLink {
+  display: block;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 3;
+  padding: 15px 20px;
+  border-radius: 50px;
+  background: #000;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 14px;
+  text-decoration: none;
+}
+/*# sourceMappingURL=App.css.map */

@@ -2,24 +2,32 @@
 
 const http = require('http');
 const fs = require('fs');
-const cors = require('cors');
-const url = require('url');
-const mysql2 = require('mysql2/promise');
 const express = require('express');
 const app = express();
 const server = http.createServer(app);
 const Socket = require('ws');
-const db = require('./todayDB/today1.json');
-const pug = require('pug');
-
-const DbConfig = require('./dbConfig');
-const Converter = require('./utils/csvToJSON');
+const config = require('config');
+const cors = require('cors');
+const path = require('path');
 const wss = new Socket.Server({server});
+const db = require('./todayDB/today.json');
 
+app.use(express.json({extended: true}));
 app.use(cors());
-app.use(express.static('public/www'));
+
+app.use(express.static('./public/www'));
 app.set('view engine', 'pug');
-app.use(handleRequest);
+
+app.use('/api/tables', require('./routes/tables.routes'));
+app.use('/api/admin', require('./routes/admin.routes'));
+
+if (process.env.NODE_ENV === 'production') {
+    app.use('/', express.static(path.join(__dirname, 'client', 'build')));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 
 function checkData(arr) {
     if (JSON.parse(arr).demo === 'start') return 'start';
@@ -150,7 +158,6 @@ wss.on('connection', function connection(ws) {
     }
 
     ws.on('message', function incoming(msg) {
-        // let jsonDB = JSON.parse(fs.readFileSync(`./todayDB/today.json`));
         let jsonDB = db;
 
         if (checkData(msg) === 'start') {
@@ -203,104 +210,9 @@ wss.on('connection', function connection(ws) {
     });
 });
 
-async function handleRequest(req, res, next) {
+const PORT = config.get('port') || 4321;
 
-    const method = req.method;
-    const pathname = url.parse(req.url, true).pathname;
-    const query = url.parse(req.url, true).query;
-
-    let field, fieldValue;
-
-    if (!!Object.keys(query).length) {
-        for (let key in query) {
-            field = key;
-            fieldValue = query[key];
-        }
-    }
-
-    // console.log(`get request with params ${field} ${fieldValue}`);
-
-    if (method === 'GET' && pathname === '/initialtable' || pathname === '/event' || pathname === '/car') {
-
-        await fetchTable(field, fieldValue)
-            .then(data => {
-                res.set({'content-type': 'application/json; charset=utf-8'});
-                res.json(data);
-            })
-            .catch(err => console.log('fetchtableError', err));
-    }
-    else if (method === 'GET' && pathname === '/admin') res.render('admin', {data: db});
-    else if (method === 'GET' && pathname === '/pilotslist') res.send(db);
-    else {
-        await res.status(404).render('page404');
-    }
-
-    if (method === 'POST') {
-        switch (pathname) {
-            case '/convert-csv':
-                const converter = new Converter('../laptimes-ua/brd_2018_09_22.csv');
-                converter.convert();
-                res.send('converted');
-                break;
-
-            case '/writetabletodb':
-                const data = JSON.parse(fs.readFileSync("dbJSON.json"));
-                addNewData(data);
-                res.send('Данные внесены в базу... но это не точно.');
-                break;
-        }
-    }
-    next();
-}
-
-async function fetchTable(f, v) {
-
-    let field = f ? f : 'track';
-    let value = v ? v : '6km Classic';
-    const data = new DbConfig().selectString(field, value);
-    const connConf = new DbConfig().connConfig;
-    console.log('fetchTable() data:', data);
-
-    const connection = await mysql2.createConnection(connConf);
-    const [rows] = await connection.execute(data);
-    await connection.end();
-
-    const outputData = [];
-    let tempObj = {};
-
-    for (let i = 0; i < rows.length; i++) {
-
-        for (let key in rows[i]) {
-            let x = rows[i];
-
-            if (x.tyre.search(/\n/)) {
-                x.tyre = x.tyre.replace(/\n/, ' ');
-            }
-            tempObj[key] = x[key];
-        }
-        outputData.push(tempObj);
-        tempObj = {};
-    }
-    // console.log(outputData);
-    return outputData;
-}
-
-async function addNewData(newData) {
-    const connConf = new DbConfig().connConfig;
-    const data = newData;
-
-    const connection = await mysql2.createConnection(connConf);
-
-    data.forEach(obj => {
-        const insertQuery = new DbConfig().insertTable(obj);
-        // console.log(insertQuery);
-        connection.execute(insertQuery.toString());
-    });
-
-    await connection.end();
-}
-
-server.listen(8080, (err) => {
+app.listen(3001, (err) => {
     if (err) throw err;
-    console.log('server running at port 3001...');
+    console.log(`server running at port ${PORT}...`);
 });
