@@ -18,8 +18,8 @@ function App() {
     const [table, setTable] = useState([]);
     const host = 'http://localhost:3001/api/tables';
     // const host = '';
-    let getQuery = '/initialtable';
-    const [url, setUrl] = useState('http://localhost:3001/api/tables/initialtable'); // dev
+    let getQuery = '';
+    const [url, setUrl] = useState('http://localhost:3001/api/tables/'); // dev
     // const [url, setUrl] = useState('/initialtable'); // prod
     const [tableHeader, setTableHeader] = useState(`6km classic - все даты`);
     const [filtersData, setFiltersData] = useState([]);
