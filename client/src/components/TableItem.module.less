@@ -1,0 +1,101 @@
+.tableItem {
+    position: relative;
+    display: flex;
+    border-bottom: solid 1px grey;
+    justify-content: space-between;
+    padding: 10px;
+    flex-wrap: wrap;
+
+    background: #efefef;
+
+    &:after {
+        content: '+';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        padding-right: 20px;
+
+        text-align: right;
+        font-weight: bold;
+        width: 20%;
+        height: 50%;
+        cursor: pointer;
+    }
+
+    &:nth-child(odd) {
+        background: lightgrey;
+    }
+
+    .tableItem__nameNtime {
+        justify-content: space-between;
+        flex: 0 1 100%;
+    }
+
+    .pilot {
+        flex: 0 1 100%;
+    }
+
+    .car {
+        text-transform: capitalize;
+        flex: 0 1 60%;
+    }
+
+    .time {
+        text-align: right;
+        flex: 0 1 33%;
+    }
+
+    .more {
+        display: block;
+        height: inherit;
+        flex: 0 1 5%;
+
+        svg {
+            vertical-align: bottom;
+            padding-top: 15px;
+            transition: all 0.3s;
+        }
+    }
+
+    .dropdownSpecs {
+        display: none;
+        flex: 0 1 100%;
+        margin-top: 5px;
+        /*padding: 15px;*/
+        transition: all 0.3s;
+        background: #efefef;
+
+        .dropdownItem {
+            justify-content: space-between;
+            margin-bottom: 5px;
+            padding: 3px 15px;
+            border-bottom: 1px solid #e0e0e0;
+
+            .dropdown__span {
+                flex: 0 1 auto;
+
+                &:last-child {
+                    text-align: right;
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+
+    .dropdownSpecs.showList {
+        display: block;
+    }
+}
+
+.tableItem.altAfter:after {
+    content: '-';
+    font-size: 25px;
+    top: 7%;
+    height: 10%;
+}
+
+.tableItem
+
+.tableItem span {
+    display: block;
+}

@@ -1,8 +1,6 @@
 import ti from './TableItem.module.css';
 
-const TableItem = (props) => {
-    const data = props.data;
-
+const TableItem = ({data}) => {
     data.make = data.make.toLowerCase();
 
     function toggleSpecs(event) {

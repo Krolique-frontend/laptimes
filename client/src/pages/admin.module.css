@@ -1,0 +1,94 @@
+.button {
+  display: block;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  font-size: 1em;
+  background: #dca407;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  transition: all 0.1s ease-in-out;
+}
+.button:focus {
+  outline: none;
+}
+.button:active {
+  transform: scale(0.95);
+}
+.header {
+  width: 100%;
+  padding: 20px 0;
+  font-weight: bold;
+  background: #4800dc;
+}
+.header nav {
+  display: flex;
+  justify-content: space-around;
+}
+.header nav .navLink {
+  display: block;
+  padding: 10px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 18px;
+  color: #fff;
+  border: 2px solid #821e1e;
+  background: #821e1e;
+  border-radius: 4px;
+  box-shadow: #0b0b0b 0 2px 20px 10px;
+  transition: all 0.1s ease-in;
+}
+/* ------------------------------------ racer tab ------------------------------------ */
+#racersData {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px 5px;
+}
+#racersData #racerForm {
+  width: 100%;
+  max-width: 450px;
+  flex-wrap: wrap;
+}
+#racersData #racerForm .inputWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+#racersData #racerForm .inputWrapper .dataLabel {
+  margin-bottom: 10px;
+  flex: 0 1 30%;
+}
+#racersData #racerForm .inputWrapper .dataInput {
+  flex: 0 1 70%;
+  padding: 5px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+#racersData #racerForm .inputWrapper .dataSelect {
+  margin-bottom: 10px;
+  display: block;
+  flex: 0 1 70%;
+  font-size: 20px;
+  padding: 5px;
+}
+#pilotsArr {
+  position: relative;
+  flex: 0 1 50%;
+}
+#pilotsArr #jsonMonitor {
+  width: inherit;
+  padding: 10px;
+  border: 1px solid blueviolet;
+  border-radius: 4px;
+  max-height: 400px;
+  overflow: auto;
+}
+#pilotsArr #sendJSON {
+  position: relative;
+  left: 50%;
+  top: 5%;
+}
+/*# sourceMappingURL=admin.module.css.map */

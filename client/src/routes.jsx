@@ -1,9 +1,9 @@
 import React from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 
-import {Main} from "./pages/DetailPage";
-import {Today} from "./pages/today/Today";
-import {AdminPage} from "./pages/LinksPage";
+import {Main} from "./pages/Main";
+import {Today} from "./pages/today/Today.jsx";
+import {AdminPage} from "./pages/AdminPage";
 import {AuthPage} from "./pages/AuthPage";
 
 export const useRoutes = isAuthenticated => {

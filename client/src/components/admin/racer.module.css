@@ -1,0 +1,27 @@
+.pilot {
+  margin: 10px;
+  display: grid;
+  grid-template-columns: 5% 35% 15% 15% 30%;
+  border-bottom: 1px solid grey;
+}
+.pilot .inputs {
+  display: inline-block;
+}
+.pilot .inputs label {
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+.pilot .inputs input {
+  margin-bottom: 10px;
+  display: inline-block;
+}
+.pilot .times {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.pilot .times .time {
+  margin-bottom: 5px;
+  padding: 5px;
+}
+/*# sourceMappingURL=racer.module.css.map */

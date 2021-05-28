@@ -1,6 +1,7 @@
-import React, {useState, useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {useHttp} from "../hooks/http.hook";
 import {AuthContext} from "../context/AuthContext";
+import styles from './Auth.module.css';
 
 export const AuthPage = () => {
     const auth = useContext(AuthContext);
@@ -11,41 +12,64 @@ export const AuthPage = () => {
     });
 
     const changeHandler = event => {
+        if (event.target.value.toLowerCase() === 'go back') {
+            window.history.back();
+        }
         setForm({...form, [event.target.name]: event.target.value});
     };
 
     const loginHandler = async () => {
         try {
             const data = await request('/api/admin/login', 'POST', {...form});
-            auth.login(data.token, data.adminName);
+            auth.login(data.token, data.userLogin);
         } catch (e) {
             console.log(JSON.stringify(e));
         }
     };
 
+    const keyPressHandler = async event => {
+        loginHandler();
+    };
+
     return (
-            <div id="accessPoint">
-                <form id="loginForm">
-                    <label htmlFor="" className="accessLabel">$login</label>
+        <div id={styles.accessPoint}>
+            <form id={styles.loginForm}>
+                <div>
+                    <label htmlFor="login" className={styles.accessLabel}>$login</label>
                     <input
                         type="text"
-                        id="login"
+                        id={styles.login}
                         name="login"
-                        className="accessInput"
+                        autoComplete="off"
+                        autoFocus="autofocus"
+                        required
+                        className={styles.accessInput}
                         value={form.login}
                         onChange={changeHandler}
                     />
-
-                    <label htmlFor="" className="accessLabel">$password</label>
+                    <span className={styles.cursor}>{form.login}</span>
+                </div>
+                <div>
+                    <label
+                        htmlFor="password"
+                        className={form.login.length <= 7 ? styles.hide : styles.accessLabel}
+                    >$password</label>
                     <input
                         type="password"
-                        id="password"
+                        autoComplete="off"
+                        required
+                        id={styles.password}
                         name="password"
-                        className="accessInput"
+                        className={form.login.length <= 7 ? styles.hide : styles.accessInput}
                         value={form.password}
                         onChange={changeHandler}
+                        onKeyPress={keyPressHandler}
                     />
-                </form>
-            </div>
+                    <span className={styles.cursor}></span>
+
+                </div>
+            </form>
+            <span className={styles.tip}>Шобы выйти напишите go back в поле login</span>
+        </div>
     );
 };

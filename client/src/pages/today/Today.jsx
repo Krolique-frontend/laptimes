@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import axios from "axios";
+import React, {useState, useEffect, useCallback} from 'react';
+import {useHttp} from "../../hooks/http.hook";
 
 import today from './today.module.css';
-import Pilot from '../../components/Pilot';
+import Pilot from '../../components/today/Pilot';
+import Menu from "../../components/Menu";
 
 const socket = new WebSocket('ws://localhost:3001/'); // dev
 // const socket = new WebSocket('ws://35.195.249.169:8080/'); // gcloud compute engine prod
@@ -12,23 +13,23 @@ socket.addEventListener('open', function (event) {
     console.log('connected to server');
 });
 
-const Today = () => {
+export function Today() {
     const listUrl = 'http://localhost:3001/api/tables/pilotslist'; // dev
     // const listUrl = '/api/tables/pilotslist'; // gcloud prod
+
+    const {request} = useHttp();
     const [list, setList] = useState([]);
+    const getList = useCallback(async () => {
+        try {
+            const data = await request(listUrl, 'GET', null);
+            setList(data);
+        } catch (e) {
+            console.log(JSON.stringify(e));
+        }
+    }, [request]);
 
-    useEffect(() => {
-        axios
-            .get(listUrl)
-            .then(res => {
-                console.log(res.data);
-                setList(res.data.sort((a, b) => {
-                    return +a.number > +b.number ? 1 : -1;
-                }));
-            })
-            .catch(err => console.log(err));
-    }, []);
 
+    useEffect(() => getList(), [getList]);
 
 
     socket.addEventListener('message', function (event) {
@@ -48,11 +49,13 @@ const Today = () => {
 
     return (
         <div className={today.table}>
-            {list.map(el => <Pilot list={el}/>)}
+            {list.map(el => <Pilot key={el.id} list={el}/>)}
 
-            <button className={today.demoButton} onClick={startDemo}>demo</button>
+            {/*<button className={today.demoButton} onClick={startDemo}>demo</button>*/}
+
+            <Menu racemode={true}/>
         </div>
-    )
-};
+    );
+}
 
-export default Today;
+// export  Today;

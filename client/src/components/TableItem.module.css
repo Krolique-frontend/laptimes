@@ -1,99 +1,83 @@
 .tableItem {
-    position: relative;
-    display: flex;
-    border-bottom: solid 1px grey;
-    justify-content: space-between;
-    padding: 10px;
-    flex-wrap: wrap;
-
-    background: #efefef;
+  position: relative;
+  display: flex;
+  border-bottom: solid 1px grey;
+  justify-content: space-between;
+  padding: 10px;
+  flex-wrap: wrap;
+  background: #efefef;
 }
-
-.tableItem .tableItem__nameNtime {
-    justify-content: space-between;
-    flex: 0 1 100%;
-}
-
 .tableItem:after {
-    content: '+';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    padding-right: 20px;
-
-    text-align: right;
-    font-weight: bold;
-    width: 20%;
-    height: 50%;
-    cursor: pointer;
+  content: '+';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  padding-right: 20px;
+  text-align: right;
+  font-weight: bold;
+  width: 20%;
+  height: 50%;
+  cursor: pointer;
 }
-
-.tableItem.altAfter:after {
-    content: '-';
-    font-size: 25px;
-    top: 7%;
-    height: 10%;
-}
-
 .tableItem:nth-child(odd) {
-    background: lightgrey;
+  background: lightgrey;
 }
-
-.tableItem span {
-    display: block;
+.tableItem .tableItem__nameNtime {
+  justify-content: space-between;
+  flex: 0 1 100%;
 }
-
 .tableItem .pilot {
-    flex: 0 1 100%;
+  flex: 0 1 100%;
 }
-
 .tableItem .car {
-    text-transform: capitalize;
-    flex: 0 1 60%;
+  text-transform: capitalize;
+  flex: 0 1 60%;
 }
-
 .tableItem .time {
-    text-align: right;
-    flex: 0 1 33%;
+  text-align: right;
+  flex: 0 1 33%;
 }
-
 .tableItem .more {
-    display: block;
-    height: inherit;
-    flex: 0 1 5%;
+  display: block;
+  height: inherit;
+  flex: 0 1 5%;
 }
-
 .tableItem .more svg {
-    vertical-align: bottom;
-    padding-top: 15px;
-    transition: all 0.3s;
+  vertical-align: bottom;
+  padding-top: 15px;
+  transition: all 0.3s;
 }
-
 .tableItem .dropdownSpecs {
-    display: none;
-    flex: 0 1 100%;
-    margin-top: 5px;
-    /*padding: 15px;*/
-    transition: all 0.3s;
-    background: #efefef;
+  display: none;
+  flex: 0 1 100%;
+  margin-top: 5px;
+  /*padding: 15px;*/
+  transition: all 0.3s;
+  background: #efefef;
 }
-
-.dropdownSpecs.showList {
-    display: block;
-}
-
 .tableItem .dropdownSpecs .dropdownItem {
-    justify-content: space-between;
-    margin-bottom: 5px;
-    padding: 3px 15px;
-    border-bottom: 1px solid #e0e0e0;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding: 3px 15px;
+  border-bottom: 1px solid #e0e0e0;
 }
-
 .tableItem .dropdownSpecs .dropdownItem .dropdown__span {
-    flex: 0 1 auto;
+  flex: 0 1 auto;
 }
-
 .tableItem .dropdownSpecs .dropdownItem .dropdown__span:last-child {
-    text-align: right;
-    text-transform: capitalize;
+  text-align: right;
+  text-transform: capitalize;
 }
+.tableItem .dropdownSpecs.showList {
+  display: block;
+}
+.tableItem.altAfter:after {
+  content: '-';
+  font-size: 25px;
+  top: 7%;
+  height: 10%;
+}
+.tableItem .tableItem span {
+  display: block;
+}
+/*# sourceMappingURL=TableItem.module.css.map */

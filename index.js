@@ -15,9 +15,6 @@ const db = require('./todayDB/today.json');
 app.use(express.json({extended: true}));
 app.use(cors());
 
-app.use(express.static('./public/www'));
-app.set('view engine', 'pug');
-
 app.use('/api/tables', require('./routes/tables.routes'));
 app.use('/api/admin', require('./routes/admin.routes'));
 
@@ -212,7 +209,7 @@ wss.on('connection', function connection(ws) {
 
 const PORT = config.get('port') || 4321;
 
-app.listen(3001, (err) => {
+server.listen(3001, (err) => {
     if (err) throw err;
     console.log(`server running at port ${PORT}...`);
 });
