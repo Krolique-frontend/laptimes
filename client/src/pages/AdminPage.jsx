@@ -13,8 +13,8 @@ import admin from './admin.module.css';
 import RacersDataTab from "../components/admin/RacersDataTab";
 import StatusTab from "../components/admin/StatusTab";
 
-const socket = new WebSocket('ws://localhost:3001/'); // dev
-// const socket = new WebSocket('ws://35.195.249.169:8080/'); // gcloud compute engine prod
+// const socket = new WebSocket('ws://localhost:3001/'); // dev
+const socket = new WebSocket('ws://35.195.249.169:8080/'); // gcloud compute engine prod
 
 socket.addEventListener('open', function (event) {
     // socket.send('Hello Server!');
