@@ -15,7 +15,7 @@
 /bin
 /models
 /controllers
-/routes
+#/routes
 app.js
 .DS_Store
 .env.local
