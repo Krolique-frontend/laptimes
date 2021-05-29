@@ -261,7 +261,7 @@
     "engine": "2.0",
     "aspiration": "Turbo",
     "drivetrain": "fwd",
-    "tyre": "нет данных",
+    "tyre": "ventus s1 evo3",
     "class": "S3000",
     "times": []
   },
@@ -399,12 +399,12 @@
   {
     "number": "36",
     "pilot": "Келеберда Андрей",
-    "make": "Ford",
-    "model": "fiesta",
-    "engine": "1.3",
+    "make": "mitsubishi",
+    "model": "evo 9",
+    "engine": "2.0",
     "aspiration": "turbo",
     "drivetrain": "awd",
-    "tyre": "нет данных",
+    "tyre": "extreme",
     "class": "Unlim",
     "times": []
   },
