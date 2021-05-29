@@ -20,7 +20,7 @@ router.get('/:pathname', async (req, res) => {
             }
         }
 
-        if (pathname === 'pilotsadmin') res.status(200).json(todayDb);
+        if (pathname === 'pilotsadmin' || 'pilotslist') res.status(200).json(todayDb);
 
         // console.log(`get request with params ${field} ${fieldValue}`);
 
@@ -30,10 +30,6 @@ router.get('/:pathname', async (req, res) => {
     } catch (e) {
         res.status(500).json({message: "Request error, try again maybe", e});
     }
-});
-
-router.get('/pilotslist', (req, res) => {
-    res.send(require('../todayDB/today1.json'));
 });
 
 router.post('/:reqPath', async (req, res) => {

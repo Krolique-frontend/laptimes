@@ -1,0 +1,28 @@
+.about {
+  background: #101d34;
+  color: #fffdd0;
+  position: fixed;
+  top: 1vh;
+  left: 2.5vw;
+  padding: 40px 15px;
+  width: 95vw;
+  height: 95vh;
+  overflow: auto;
+  border-radius: 10px;
+  box-shadow: #fffdd0 1px 1px 20px 4px;
+  z-index: 7;
+}
+.about p {
+  margin-bottom: 15px;
+}
+.about p:first-letter {
+  padding-left: 20px;
+}
+.about p ul {
+  list-style: inside;
+  margin-left: 15px;
+}
+.about p ul li a {
+  color: #6acfff;
+}
+/*# sourceMappingURL=about.module.css.map */

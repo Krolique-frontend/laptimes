@@ -2,11 +2,12 @@
   padding: 15px 20px;
   margin: 2px 0;
   border-radius: 50px;
-  background: #000;
+  background: #fffacd;
   transition: all 10ms ease-in-out;
-  color: #fff;
+  color: #000;
   text-transform: uppercase;
   font-size: 14px;
+  font-weight: bold;
   outline: none;
   border: none;
 }
@@ -60,11 +61,12 @@
   padding: 15px 20px;
   margin: 2px 0;
   border-radius: 50px;
-  background: #000;
+  background: #fffacd;
   transition: all 10ms ease-in-out;
-  color: #fff;
+  color: #000;
   text-transform: uppercase;
   font-size: 14px;
+  font-weight: bold;
   outline: none;
   border: none;
 }
@@ -157,11 +159,12 @@
   padding: 15px 20px;
   margin: 2px 0;
   border-radius: 50px;
-  background: #000;
+  background: #fffacd;
   transition: all 10ms ease-in-out;
-  color: #fff;
+  color: #000;
   text-transform: uppercase;
   font-size: 14px;
+  font-weight: bold;
   outline: none;
   border: none;
 }
@@ -193,11 +196,12 @@
   padding: 15px 20px;
   margin: 2px 0;
   border-radius: 50px;
-  background: #000;
+  background: #fffacd;
   transition: all 10ms ease-in-out;
-  color: #fff;
+  color: #000;
   text-transform: uppercase;
   font-size: 14px;
+  font-weight: bold;
   outline: none;
   border: none;
 }

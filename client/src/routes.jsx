@@ -14,7 +14,15 @@ export const useRoutes = isAuthenticated => {
                     <AdminPage/>
                 </Route>
 
-                <Redirect to="/" />
+                <Route exact path="/">
+                    <Main/>
+                </Route>
+
+                <Route exact path="/today">
+                    <Today/>
+                </Route>
+
+                <Redirect to="/admin" />
             </Switch>
         )
     }

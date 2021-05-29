@@ -6,11 +6,6 @@ const DbConfig = require('../db/dbConfig');
 const mysql2 = require('mysql2/promise');
 const config = require('config');
 
-router.get('/', (req, res) => {
-    const db = require('../todayDB/today1.json');
-    res.render('../views/admin', {data: db});
-});
-
 router.post('/register', async (req, res) => {
     try {
         const db = new DbConfig();

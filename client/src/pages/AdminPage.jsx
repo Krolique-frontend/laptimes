@@ -13,8 +13,8 @@ import admin from './admin.module.css';
 import RacersDataTab from "../components/admin/RacersDataTab";
 import StatusTab from "../components/admin/StatusTab";
 
-// const socket = new WebSocket('ws://localhost:3001/'); // dev
-const socket = new WebSocket('ws://35.195.249.169:8080/'); // gcloud compute engine prod
+const socket = new WebSocket('ws://localhost:3001/'); // dev
+// const socket = new WebSocket('ws://35.195.249.169:8080/'); // gcloud compute engine prod
 
 socket.addEventListener('open', function (event) {
     // socket.send('Hello Server!');
@@ -45,6 +45,9 @@ export const AdminPage = () => {
         history.push('/');
     };
 
+    const sendData = (data) => {
+        socket.send(JSON.stringify(data));
+    };
 
     return (
         <Router>
@@ -58,9 +61,12 @@ export const AdminPage = () => {
 
             <Switch>
                 <Route path="/admin/status">
-                    <StatusTab data={pilotsList} />
+                    <StatusTab list={pilotsList} sendWs={sendData}/>
                 </Route>
-                <Route path="/admin/racersData" component={RacersDataTab}/>
+
+                <Route path="/admin/racersData">
+                    <RacersDataTab sendDb={sendData} />
+                </Route>
 
                 <Redirect to="/admin/racersData" />
             </Switch>

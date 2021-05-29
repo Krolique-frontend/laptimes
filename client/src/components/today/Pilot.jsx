@@ -1,40 +1,43 @@
 import style from './pilot.module.css';
 
-const Pilot = (props) => {
-    let list = props.list;
-
+const Pilot = ({list}) => {
+    console.log(style);
     return (
-        <div className={`${style.pilot} ${
-            list.status === 'session'
-                ? style.session
-                : list.status === 'standby'
-                ? style.stdBy
-                : style.park
-        }`}
-        >
-            <span className={style.pilotNumber}>{list.number}</span>
+        <div className={style.pilot}>
+            <span className={style.num}>{list.number}</span>
 
-            <span className={style.pilotName}>
+            <span className={style.name}>
                  {list.pilot}
-                <span className={style.pilotCar}>
+                <span className={style.car}>
                     {list.make.toUpperCase()} {list.model}
                 </span>
              </span>
 
-            <span className={style.pilotStatus}>
-                {list.status === 'session'
-                    ? 'дубасит'
+            <span className={style.statusCell}>
+                <span
+                    className={style.status}
+                    style={list.status === 'session'
+                    ? {background: 'rgba(0, 180, 0, 0.8)'}
                     : list.status === 'standby'
-                        ? "готовится"
-                        : "техпарк"
-                }
+                        ? {background: '#ffbc00c4'}
+                        : {background: '#ff0e0ecf'}}
+                >
+                    {list.status === 'session'
+                        ? 'дубасит'
+                        : list.status === 'standby'
+                            ? "готовится"
+                            : "техпарк"
+                    }
+                </span>
             </span>
 
-            <span className={style.pilotTimes}>{
-                list.times
-                    ? list.times.map(time => <span className={style.time}>{time}</span>)
-                    : null
-            }</span>
+            <span className={style.times}>
+                {
+                    list.times
+                        ? list.times.map(time => <span className={style.time}>{time}</span>)
+                        : null
+                }
+            </span>
         </div>
     );
 };

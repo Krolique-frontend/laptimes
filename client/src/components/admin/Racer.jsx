@@ -31,7 +31,6 @@ const Racer = ({pilot}) => {
                         type="radio"
                         name={pilot.pilot}
                         value='park'
-                        checked
                     />
                 </div>
             </div>

@@ -16,6 +16,9 @@ function App() {
             <Router>
                 <div>{routes}</div>
             </Router>
+            <footer className="footer">
+                Разработка - <a href="mailto:korolenko.fe@gmail.com" className="mailLink">Николай</a>
+            </footer>
         </AuthContext.Provider>
     );
 }

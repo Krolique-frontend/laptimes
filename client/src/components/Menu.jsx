@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import menu from './Menu.module.css';
 import {useHttp} from "../hooks/http.hook";
 import {Filters} from "./Filters";
+import About from "./About";
 
 const Menu = ({racemode}) => {
     // const dates = props.dates;
@@ -84,6 +85,18 @@ const Menu = ({racemode}) => {
                                 filters={filtersArr}
                             />
                         </form>
+                    </li>
+
+                    <li className={menu.menuItem}>
+                        <button
+                            className={menu.dropdown}
+                            onClick={toggleDropdown}
+                        >
+                            Инфо
+                        </button>
+                        <div className={menu.list}>
+                            <About/>
+                        </div>
                     </li>
 
                     <li className={menu.menuItem}>

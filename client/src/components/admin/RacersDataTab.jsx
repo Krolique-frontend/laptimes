@@ -1,90 +1,72 @@
-import React from 'react';
+import React, {useState} from 'react';
 import admin from "../../pages/admin.module.css";
+import FormComp from "./FormComp";
 
-const RacersDataTab = () => {
+const stuff = [
+    'date',
+    'event',
+    'track',
+    'number',
+    'pilot',
+    'make',
+    'model',
+    'engine',
+    'aspiration',
+    'drivetrain',
+    'tyre',
+    'class',
+    'time'
+];
+const racers = [];
+
+const RacersDataTab = ({sendDb}) => {
+    const [display, setDisplay] = useState([]);
+    function sendToDb() {
+        sendDb(racers);
+    }
+
+    const formSubmit = event => {
+        event.preventDefault();
+
+        const form = event.target;
+        const data = {
+        };
+
+        for (let item of form) {
+            data[item.id] = item.value;
+            delete data['racerButton'];
+            delete data[""];
+
+            if (!data['date']) delete data['date'];
+        }
+
+        racers.push(data);
+        console.log(data);
+
+        let toDisplay = racers.map(obj => JSON
+            .stringify(obj)
+            .replaceAll('",', '"\n')
+            .replaceAll('"}', '"}\n\n'));
+
+        setDisplay(prev => toDisplay);
+
+        // for (let item of form) {
+        //     if (item.type === 'text') item.value = '';
+        // }
+
+        return false;
+    };
+
     return (
         <section id={admin.racersData}>
-            <form id={admin.racerForm} name="racerAdminka">
-                <div className={admin.inputWrapper}>
-                    <label htmlFor="" className={admin.dataLabel}>дата</label>
-                    <input type="text" className={admin.dataInput} required/>
-                </div>
-
-                <div className={admin.inputWrapper}>
-                    <label htmlFor="" className={admin.dataLabel}>ивент</label>
-                    <input type="text" className={admin.dataInput} required/>
-                </div>
-
-                <div className={admin.inputWrapper}>
-                    <label htmlFor="" className={admin.dataLabel}>трэк</label>
-                    <input type="text" className={admin.dataInput} required/>
-                </div>
-
-                <div className={admin.inputWrapper}>
-                    <label htmlFor="" className={admin.dataLabel}>№ гонщека</label>
-                    <input type="text" className={admin.dataInput} required/>
-                </div>
-
-                <div className={admin.inputWrapper}>
-                    <label htmlFor="" className={admin.dataLabel}>Ф.И. (без О.)</label>
-                    <input type="text" className={admin.dataInput} required/>
-                </div>
-
-                <div className={admin.inputWrapper}>
-                    <label htmlFor="" className={admin.dataLabel}>тачка</label>
-                    <input type="text" className={admin.dataInput} required/>
-                </div>
-
-                <div className={admin.inputWrapper}>
-                    <label htmlFor="" className={admin.dataLabel}>модель</label>
-                    <input type="text" className={admin.dataInput} required/>
-                </div>
-
-                <div className={admin.inputWrapper}>
-                    <label htmlFor="" className={admin.dataLabel}>мотор</label>
-                    <input type="text" className={admin.dataInput} required/>
-                </div>
-
-                <div className={admin.inputWrapper}>
-                    <label htmlFor="" className={admin.dataLabel}>аспиратион</label>
-                    <select id={admin.aspiration} className={admin.dataSelect} required>
-                        <option value="atmo">atmo</option>
-                        <option value="turbo">turbo</option>
-                        <option value="supercharger">supercharger</option>
-                        <option value="electro">electro</option>
-                    </select>
-                </div>
-
-                <div className={admin.inputWrapper}>
-                    <label htmlFor="" className={admin.dataLabel}>Привод</label>
-                    <select id={admin.drivetrain} className={admin.dataSelect} required>
-                        <option value="rwd">rwd</option>
-                        <option value="awd">awd</option>
-                        <option value="fwd">fwd</option>
-                    </select>
-                </div>
-
-                <div className={admin.inputWrapper}>
-                    <label htmlFor="" className={admin.dataLabel}>резина</label>
-                    <input type="text" className={admin.dataInput} required/>
-                </div>
-
-                <div className={admin.inputWrapper}>
-                    <label htmlFor="" className={admin.dataLabel}>класс</label>
-                    <input type="text" className={admin.dataInput} required/>
-                </div>
-
-                <div className={admin.inputWrapper}>
-                    <label htmlFor="" className={admin.dataLabel}>лучшее время</label>
-                    <input type="text" className={admin.dataInput} required/>
-                </div>
-
+            <form id={admin.racerForm} onSubmit={formSubmit} name="racerAdminka">
+                {stuff.map(elem => <FormComp key={elem} props={elem} />)}
                 <button className={admin.button}>добавить</button>
             </form>
 
             <aside id={admin.pilotsArr}>
-                <div id={admin.jsonMonitor}></div>
-                <button className={admin.button}>отправить</button>
+                <div id={admin.jsonMonitor}>{display}</div>
+                <button className={admin.button} onClick={sendToDb}>отправить</button>
             </aside>
         </section>
     );

@@ -10,7 +10,9 @@ const config = require('config');
 const cors = require('cors');
 const path = require('path');
 const wss = new Socket.Server({server});
-const db = require('./todayDB/today.json');
+const sortByStatus = require('./utils/sortByStatus');
+const checkData = require('./utils/checkData');
+const todayDemo = require('./utils/todayDemo');
 
 app.use(express.json({extended: true}));
 app.use(cors());
@@ -26,136 +28,11 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-function checkData(arr) {
-    if (JSON.parse(arr).demo === 'start') return 'start';
-    else return JSON.parse(arr)[0].hasOwnProperty('date');
-}
-
-function sortByStatus(arr) {
-    return arr.sort((a, b) => {
-        let as = a.status === 'session'
-            ? 3
-            : a.status === 'standby'
-                ? 2
-                : 1;
-
-        let bs = b.status === 'session'
-            ? 3
-            : b.status === 'standby'
-                ? 2
-                : 1;
-
-        return as > bs ? -1 : 1;
-    });
-}
-
 wss.on('connection', function connection(ws) {
-    console.log(`somebody connected`);
-
-    function random(num) {
-        return Math.floor(Math.random() * num);
-    }
-
-    function todayDemo() {
-        const list = db.map(el => {
-            el.status = 'park';
-            el.times = [];
-            return el;
-        });
-
-        let p1 = list[5];
-        let p2 = list[7];
-        let p3 = list[12];
-        let p4 = list[28];
-        let p5 = list[20];
-        let p6 = list[25];
-        let p7 = list[14];
-        let p8 = list[6];
-        let p9 = list[3];
-
-        setTimeout(() => {
-            [p1, p2, p3].forEach(p => p.status = 'session');
-            [p4, p5, p6].forEach(p => p.status = 'standby');
-            sortByStatus(list);
-
-            wss.clients.forEach(function each(client) {
-                client.send(JSON.stringify(list));
-            } );
-        }, 3000);
-
-        setTimeout(() => {
-            [p1, p2, p3].forEach(p => {
-                let time = `01:0${random(2)}:${
-                    random(59) < 10 ? `0${random(9)}` : random(59)
-                }`;
-
-                p.times.push(time);
-            });
-
-            wss.clients.forEach(function each(client) {
-                client.send(JSON.stringify(list));
-            } );
-        }, 10000);
-
-        setTimeout(() => {
-            [p1, p2, p3].forEach(p => {
-                p.status = 'park';
-            });
-
-            [p4, p5, p6].forEach(p => {
-                p.status = 'session';
-            });
-
-            [p7, p8, p9].forEach(p => {
-                p.status = 'standby';
-            });
-
-            wss.clients.forEach(function each(client) {
-                client.send(JSON.stringify(list));
-            } );
-        }, 14000);
-
-        setTimeout(() => {
-            sortByStatus(list);
-
-            wss.clients.forEach(function each(client) {
-                client.send(JSON.stringify(list));
-            } );
-        }, 17500);
-
-        setTimeout(() => {
-            [p4, p5, p6].forEach(p => {
-                let time = `01:0${random(2)}:${
-                    random(59) < 10 ? `0${random(9)}` : random(59)
-                }`;
-
-                p.times.push(time);
-            });
-
-            wss.clients.forEach(function each(client) {
-                client.send(JSON.stringify(list));
-            } );
-        }, 21000);
-
-        setTimeout(() => {
-            [p4, p5, p6].forEach(p => {
-                p.status = 'park';
-            });
-
-            [p7, p8, p9].forEach(p => {
-                p.status = 'session';
-            });
-
-            sortByStatus(list);
-
-            wss.clients.forEach(function each(client) {
-                client.send(JSON.stringify(list));
-            } );
-        }, 24000);
-    }
+    console.log(`Incoming websocket connection...`);
 
     ws.on('message', function incoming(msg) {
-        let jsonDB = db;
+        let jsonDB = require('./todayDB/todayPilots.json');
 
         if (checkData(msg) === 'start') {
             console.log('>> checkData(msg)', checkData(msg));
@@ -163,9 +40,9 @@ wss.on('connection', function connection(ws) {
         }
 
         else if (checkData(msg)) {
-            // const fileName = JSON.parse(msg)[0].date.split('.').join('_');
+            const fileName = JSON.parse(msg)[0].date.split('.').join('_');
 
-            fs.writeFile(`./todayDB/today1.json`, msg, (err) => {
+            fs.writeFile(fileName, msg, (err) => {
                 if (err) throw err;
                 // console.log(`file ${fileName}.json - created`);
             });
@@ -176,7 +53,7 @@ wss.on('connection', function connection(ws) {
                 obj['status'] = statusData.find(el => {
                     return el.name === obj.pilot ? el.status : null;
                 });
-                obj.status = obj.status.status;
+                if (obj.status) obj.status = obj.status.status;
             });
 
             statusData.forEach(obj => {
@@ -189,9 +66,9 @@ wss.on('connection', function connection(ws) {
 
             sortByStatus(jsonDB);
 
-            fs.writeFile(`./todayDB/today1.json`, JSON.stringify(jsonDB), (err) => {
+            fs.writeFile(`./todayDB/todayPilots.json`, JSON.stringify(jsonDB), (err) => {
                 if (err) throw err;
-                console.log('file today1.json updated');
+                console.log('file todayPilots.json updated');
                 // console.log(data);
             });
         }
@@ -207,9 +84,9 @@ wss.on('connection', function connection(ws) {
     });
 });
 
-const PORT = config.get('port') || 4321;
+const PORT = config.get('port') || 3001;
 
-server.listen(3001, (err) => {
+server.listen(PORT, (err) => {
     if (err) throw err;
     console.log(`server running at port ${PORT}...`);
 });
