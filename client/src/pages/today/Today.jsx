@@ -5,8 +5,8 @@ import today from './today.module.css';
 import Pilot from '../../components/today/Pilot';
 import Menu from "../../components/Menu";
 
-const socket = new WebSocket('ws://localhost:3001/'); // dev
-// const socket = new WebSocket('ws://35.195.249.169:8080/'); // gcloud compute engine prod
+// const socket = new WebSocket('ws://localhost:3001/'); // dev
+const socket = new WebSocket('ws://35.195.249.169:8080/'); // gcloud compute engine prod
 
 socket.addEventListener('open', function (event) {
     // socket.send('Hello Server!');
@@ -14,8 +14,8 @@ socket.addEventListener('open', function (event) {
 });
 
 export function Today() {
-    const listUrl = 'http://localhost:3001/api/tables/pilotslist'; // dev
-    // const listUrl = '/api/tables/pilotslist'; // gcloud prod
+    // const listUrl = 'http://localhost:3001/api/tables/pilotslist'; // dev
+    const listUrl = '/api/tables/pilotslist'; // gcloud prod
 
     const {request} = useHttp();
     const [list, setList] = useState([]);
