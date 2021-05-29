@@ -19,14 +19,15 @@ router.get('/:pathname', async (req, res) => {
                 fieldValue = query[key];
             }
         }
+        if (pathname === 'initialtable') {
+            const data = await fetchData(field, fieldValue, pathname);
 
-        if (pathname === 'pilotsadmin' || 'pilotslist') res.status(200).json(todayDb);
+            return res.status(200).json(data);
+        }
+
+        else if (pathname === 'pilotsadmin' || 'pilotslist') return res.status(200).json(todayDb);
 
         // console.log(`get request with params ${field} ${fieldValue}`);
-
-        const data = await fetchData(field, fieldValue, pathname);
-
-        res.status(200).json(data);
     } catch (e) {
         res.status(500).json({message: "Request error, try again maybe", e});
     }

@@ -1,7 +1,7 @@
 import style from './pilot.module.css';
 
 const Pilot = ({list}) => {
-    console.log(style);
+
     return (
         <div className={style.pilot}>
             <span className={style.num}>{list.number}</span>

@@ -41,7 +41,7 @@ const RacersDataTab = ({sendDb}) => {
         }
 
         racers.push(data);
-        console.log(data);
+        // console.log(data);
 
         let toDisplay = racers.map(obj => JSON
             .stringify(obj)
