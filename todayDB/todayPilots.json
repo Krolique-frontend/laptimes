@@ -252,6 +252,17 @@
     "tyre": "нет данных",
     "class": "S2000",
     "times": []
+  },{
+    "number": "22",
+    "pilot": "Зинчук Сергей",
+    "make": "n/a",
+    "model": "n/a",
+    "engine": "0.0",
+    "aspiration": "n/a",
+    "drivetrain": "n/a",
+    "tyre": "нет данных",
+    "class": "S2000",
+    "times": []
   },
   {
     "number": "23",
@@ -432,6 +443,19 @@
     "class": "Unlim",
     "times": []
   },
+
+  {
+    "number": "40",
+    "pilot": "Савилов Евгений",
+    "make": "mazda",
+    "model": "mx5",
+    "engine": "2.0",
+    "aspiration": "atmo",
+    "drivetrain": "rwd",
+    "tyre": "race gc medium",
+    "class": "unlim",
+    "times": []
+  },
   {
     "number": "41",
     "pilot": "Тютюнник Сергей",
@@ -491,5 +515,19 @@
     "tyre": "нет данных",
     "class": "RWD Gymkhana",
     "times": []
+  },
+
+  {
+    "number": "46",
+    "pilot": "Загребайленко Юрий",
+    "make": "ваз",
+    "model": "2105",
+    "engine": "1.5",
+    "aspiration": "atmo",
+    "drivetrain": "rwd",
+    "tyre": "нет данных",
+    "class": "RWD Gymkhana",
+    "times": []
   }
+
 ]
