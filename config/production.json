@@ -1,13 +1,5 @@
 {
   "port": 8080,
-  "mongoUri": "mongodb+srv://krolique_admin:rhjkbret@clusterfso0.jlb6t.mongodb.net/note-app?retryWrites=true&w=majority",
   "jwtSecret": "krolique loves opels",
-  "baseUrl": "http://localhost:8080/",
-  "connConfig": {
-    "host": "35.205.6.227",
-    "port": "3306",
-    "database": "alltimes",
-    "user": "root",
-    "password": "rhjkbret"
-  }
+  "baseUrl": "http://localhost:8080/"
 }

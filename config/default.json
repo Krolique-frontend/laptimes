@@ -1,11 +1,5 @@
 {
   "port": 3001,
   "jwtSecret": "krolique loves opels",
-  "baseUrl": "http://localhost:3001/",
-  "connConfig": {
-       "host": "localhost",
-       "database": "laptimes",
-       "user": "root",
-       "password": "rhjkbret"
-   }
+  "baseUrl": "http://localhost:3001/"
 }

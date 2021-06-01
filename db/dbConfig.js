@@ -1,9 +1,8 @@
-const config = require('config');
 const sqlQueries = require('./sqlQueries');
 
 class DbConfig {
-    constructor(){
-        this.connConfig = config.get('connConfig');
+    constructor() {
+        this.connConfig = JSON.parse(process.env.DBCONFIG);
     }
 
     selectString(table, selectRow, selectValue) {
@@ -18,16 +17,12 @@ class DbConfig {
                 .replace('[table]', this._table)
                 .replace('[selectrow]', this._selectRow)
                 .replace('[fieldValue]', this._selectValue);
-        }
-
-        else if (this._selectRow !== undefined && this._selectValue !== undefined) {
+        } else if (this._selectRow !== undefined && this._selectValue !== undefined) {
             return sqlQueries.select
                 .replace('[table]', this._table)
                 .replace('[selectrow]', this._selectRow)
                 .replace('[fieldValue]', this._selectValue);
-        }
-
-        else return sqlQueries.selectDefault;
+        } else return sqlQueries.selectDefault;
     }
 
     updateString(value, newRow, newValue) {
