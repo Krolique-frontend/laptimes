@@ -1,4 +1,5 @@
 const sqlQueries = require('./sqlQueries');
+const dotenv = require('dotenv').config();
 
 class DbConfig {
     constructor() {
@@ -54,6 +55,15 @@ class DbConfig {
             .replace('[tyre]', this._object.tyre)
             .replace('[class]', this._object.class)
             .replace('[time]', this._object.time);
+    }
+
+    deleteRows(field, value) {
+        this._field = field;
+        this._value = value;
+
+        return sqlQueries.delete
+            .replace('[delRow]', this._field)
+            .replace('[delValue]', this._value);
     }
 
     createUserTable() {

@@ -23,7 +23,8 @@ const Menu = ({racemode}) => {
     const trackSelect = async (event) => {
         // console.log('selected');
         try {
-            const data = await request(`/api/tables/track/${event.target.value}`);
+            console.log(event.target.value);
+            const data = await request(`/api/tables/track?track=${event.target.value}`);
             // console.log(data);
         } catch (e) {
             console.log('eroor happened', JSON.stringify(e));

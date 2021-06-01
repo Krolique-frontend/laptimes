@@ -1,15 +1,11 @@
 const mysql2 = require('mysql2/promise');
 const DbConfig = require('./dbConfig');
 
-async function fetchData(f, v, path) {
+async function fetchData(f, v) {
     try {
         let field = f ? f : 'track';
         let value = v ? v : '6km Classic';
         let table = 'alltimes';
-        switch (path) {
-            case 'nikoring':
-                value = path;
-        }
 
         const data = new DbConfig().selectString(table, field, value);
         const connConf = new DbConfig().connConfig;
