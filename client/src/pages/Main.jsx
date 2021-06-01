@@ -38,6 +38,11 @@ export const Main = () => {
         }
     };
 
+    const fromMenu = useCallback((data)=>{
+        setTable(data);
+        setTableHeader(`${data[0].track} - все даты`);
+    });
+
     return (
         <div className="table">
             <div className="tableHeader">
@@ -51,7 +56,7 @@ export const Main = () => {
                 {table.map((elem) => <TableItem key={elem.id} data={elem}/>)}
             </ul>
 
-            <Menu racemode={false}/>
+            <Menu racemode={false} toMain={fromMenu}/>
         </div>
     );
 };

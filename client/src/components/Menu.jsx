@@ -4,7 +4,7 @@ import {useHttp} from "../hooks/http.hook";
 import {Filters} from "./Filters";
 import About from "./About";
 
-const Menu = ({racemode}) => {
+const Menu = ({racemode, toMain}) => {
     // const dates = props.dates;
     const {request} = useHttp();
     const [filtersArr, setFilters] = useState([]);
@@ -21,11 +21,10 @@ const Menu = ({racemode}) => {
     }
 
     const trackSelect = async (event) => {
-        // console.log('selected');
         try {
-            console.log(event.target.value);
             const data = await request(`/api/tables/track?track=${event.target.value}`);
-            // console.log(data);
+            toMain(data);
+            toggleMenu();
         } catch (e) {
             console.log('eroor happened', JSON.stringify(e));
         }

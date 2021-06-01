@@ -30,12 +30,12 @@ router.get('/:pathname', async (req, res) => {
         }
 
         else if (pathname === 'track') {
-            if (fieldValue === 'nikoring') {
-                fieldValue = "никоринг";
-                const data = await fetchData(field, fieldValue);
+            if (fieldValue === 'nikoring') fieldValue = "никоринг";
+            else if (fieldValue === '6km') fieldValue = '6km Classic';
 
-                return res.status(200).json(data);
-            }
+            const data = await fetchData(field, fieldValue);
+
+            return res.status(200).json(data);
         }
 
         else if (pathname === 'pilotsadmin' || 'pilotslist') return res.status(200).json(todayDb);
