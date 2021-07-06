@@ -40,8 +40,6 @@
 }
 @media (min-width: 992px) {
   .menu {
-    display: flex;
-    position: absolute;
     right: 0;
     top: 0;
     background: #363636;
@@ -62,6 +60,7 @@
 }
 .menu .menuItem .dropdown {
   display: block;
+  cursor: pointer;
   padding: 15px 20px;
   margin: 2px 0;
   border-radius: 50px;
@@ -103,11 +102,10 @@
 }
 @media (min-width: 992px) {
   .menu .menuItem .list {
-    position: relative;
-    top: 0;
+    position: fixed;
+    top: 10%;
     right: 0;
-    width: 100%;
-    background: grey;
+    width: 33%;
     flex-direction: column;
   }
 }
@@ -197,6 +195,11 @@
 .menu .menuItem .showList {
   transform: translate(-116%, 0px);
 }
+@media (min-width: 992px) {
+  .menu .menuItem .showList {
+    transform: translate(-75%, 0);
+  }
+}
 .menu .menuItem .menuLink {
   display: block;
   width: auto;
@@ -231,6 +234,11 @@
 }
 .show {
   right: 20px;
+}
+@media (min-width: 992px) {
+  .show {
+    right: 0;
+  }
 }
 .menuButton {
   display: block;

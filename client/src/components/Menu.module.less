@@ -43,8 +43,6 @@
   transition: all 0.3s ease-in;
 
   @media (min-width: 992px) {
-    display: flex;
-    position: absolute;
     right: 0;
     top: 0;
 
@@ -65,6 +63,7 @@
 
     .dropdown {
       display: block;
+      cursor: pointer;
       .btnStyle;
     }
 
@@ -80,11 +79,10 @@
       transition: all 0.3s ease-in-out;
 
       @media(min-width: 992px) {
-        position: relative;
-        top: 0;
+        position: fixed;
+        top: 10%;
         right: 0;
-        width: 100%;
-        background: grey;
+        width: 33%;
         flex-direction: column;
       }
 
@@ -152,6 +150,10 @@
 
     .showList {
       transform: translate(-116%, 0px);
+
+      @media (min-width: 992px) {
+        transform: translate(-75%, 0);
+      }
     }
 
     .menuLink {
@@ -165,6 +167,10 @@
 
 .show {
   right: 20px;
+
+  @media (min-width: 992px) {
+    right: 0;
+  }
 }
 
 .menuButton {
