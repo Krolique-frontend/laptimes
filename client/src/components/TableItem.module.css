@@ -1,83 +1,60 @@
 .tableItem {
   position: relative;
   display: flex;
-  border-bottom: solid 1px grey;
   justify-content: space-between;
   padding: 10px;
   flex-wrap: wrap;
-  background: #efefef;
-}
-.tableItem:after {
-  content: '+';
-  position: absolute;
-  right: 0;
-  top: 50%;
-  padding-right: 20px;
-  text-align: right;
-  font-weight: bold;
-  width: 20%;
-  height: 50%;
-  cursor: pointer;
-}
-.tableItem:nth-child(odd) {
-  background: lightgrey;
+  background: #0a335c;
+  color: #fff;
+  border-radius: 5px;
+  margin-bottom: 5px;
 }
 .tableItem .tableItem__nameNtime {
   justify-content: space-between;
   flex: 0 1 100%;
 }
-.tableItem .pilot {
+.tableItem .tableItem__nameNtime .pilot {
   flex: 0 1 100%;
+}
+.tableItem .tableItem__nameNtime .time {
+  text-align: right;
+  flex: 0 1 33%;
 }
 .tableItem .car {
   text-transform: capitalize;
   flex: 0 1 60%;
+  font-size: 14px;
+  padding-left: 20px;
+  color: #d6d9e2;
 }
-.tableItem .time {
-  text-align: right;
-  flex: 0 1 33%;
+.tableItem .arrow {
+  text-align: center;
+  flex: 0 1 100%;
+  margin-top: 5px;
+  margin-bottom: -5px;
+  transform: scale(1, 0.5);
+  transition: all 0.3s ease-in-out;
 }
-.tableItem .more {
-  display: block;
-  height: inherit;
-  flex: 0 1 5%;
+.tableItem .arrow img {
+  width: 35px;
 }
-.tableItem .more svg {
-  vertical-align: bottom;
-  padding-top: 15px;
-  transition: all 0.3s;
+.tableItem .arrow.flip {
+  transform: matrix(1, 0, 0, -0.5, 0, -3);
 }
 .tableItem .dropdownSpecs {
   display: none;
   flex: 0 1 100%;
   margin-top: 5px;
-  /*padding: 15px;*/
   transition: all 0.3s;
-  background: #efefef;
 }
 .tableItem .dropdownSpecs .dropdownItem {
   justify-content: space-between;
   margin-bottom: 5px;
-  padding: 3px 15px;
-  border-bottom: 1px solid #e0e0e0;
+  padding: 5px 15px;
+  background: #1c4b82;
+  border-radius: 5px;
 }
-.tableItem .dropdownSpecs .dropdownItem .dropdown__span {
-  flex: 0 1 auto;
-}
-.tableItem .dropdownSpecs .dropdownItem .dropdown__span:last-child {
-  text-align: right;
-  text-transform: capitalize;
-}
-.tableItem .dropdownSpecs.showList {
-  display: block;
-}
-.tableItem.altAfter:after {
-  content: '-';
-  font-size: 25px;
-  top: 7%;
-  height: 10%;
-}
-.tableItem .tableItem span {
+.tableItem .showList {
   display: block;
 }
 /*# sourceMappingURL=TableItem.module.css.map */

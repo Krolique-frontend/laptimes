@@ -76,6 +76,37 @@
   font-size: 20px;
   padding: 5px;
 }
+#racersData .racemodeBlock .racemodeSwitch {
+  display: block;
+  width: 40px;
+  height: 10px;
+  background: #404040;
+  position: relative;
+  margin: 10px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in;
+}
+#racersData .racemodeBlock .racemodeSwitch .rmsCaret {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: #000;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+#racersData .racemodeBlock #racemodeCheckbox {
+  display: none;
+}
+#racersData .racemodeBlock #racemodeCheckbox:checked ~ .racemodeSwitch {
+  background: green;
+}
+#racersData .racemodeBlock #racemodeCheckbox:checked ~ .racemodeSwitch .rmsCaret {
+  left: 20px;
+}
 #pilotsArr {
   position: relative;
   flex: 0 1 50%;

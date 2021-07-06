@@ -91,6 +91,44 @@
       }
     }
   }
+
+  .racemodeBlock {
+    .racemodeSwitch {
+      display: block;
+      width: 40px;
+      height: 10px;
+      background: #404040;
+      position: relative;
+      margin: 10px;
+      border-radius: 10px;
+      transition: all 0.2s ease-in;
+
+      .rmsCaret {
+        position: absolute;
+        top: -5px;
+        left: 0;
+        display: block;
+        width: 20px;
+        height: 20px;
+        background: #000;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease-in;
+      }
+    }
+
+    #racemodeCheckbox {
+      display: none;
+
+      &:checked ~ .racemodeSwitch{
+        background: green;
+      }
+
+      &:checked ~ .racemodeSwitch .rmsCaret{
+        left: 20px;
+      }
+    }
+  }
 }
 
 #pilotsArr {

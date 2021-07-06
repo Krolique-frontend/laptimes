@@ -56,7 +56,7 @@ export const Main = () => {
                 {table.map((elem) => <TableItem key={elem.id} data={elem}/>)}
             </ul>
 
-            <Menu racemode={false} toMain={fromMenu}/>
+            <Menu toMain={fromMenu}/>
         </div>
     );
 };

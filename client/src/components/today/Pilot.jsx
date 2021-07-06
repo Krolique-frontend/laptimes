@@ -11,6 +11,7 @@ const Pilot = ({list}) => {
                 <span className={style.car}>
                     {list.make.toUpperCase()} {list.model}
                 </span>
+                <span className={style.class}>Класс - {list.class}</span>
              </span>
 
             <span className={style.statusCell}>
@@ -32,6 +33,9 @@ const Pilot = ({list}) => {
             </span>
 
             <span className={style.times}>
+                <span className={style.time}>00:55:99</span>
+                <span className={style.time}>00:55:99</span>
+                <span className={style.time}>00:55:99</span>
                 {
                     list.times
                         ? list.times.map(time => <span className={style.time}>{time}</span>)

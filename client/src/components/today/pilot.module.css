@@ -13,6 +13,14 @@
   padding-left: 10px;
   color: #d6d9e2;
   font-size: 0.65em;
+  margin-bottom: 3px;
+}
+.pilot .class {
+  text-transform: capitalize;
+  display: block;
+  padding-left: 10px;
+  color: #d6d9e2;
+  font-size: 0.65em;
 }
 .pilot .statusCell {
   text-align: center;
@@ -26,5 +34,10 @@
 .pilot .times {
   display: flex;
   flex-direction: column;
+}
+.pilot .times .time {
+  margin-bottom: 3px;
+  font-size: 0.95rem;
+  text-align: right;
 }
 /*# sourceMappingURL=pilot.module.css.map */

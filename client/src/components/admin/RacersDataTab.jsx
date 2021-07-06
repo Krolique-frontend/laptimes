@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {useHttp} from '../../hooks/http.hook';
 import admin from "../../pages/admin.module.css";
 import FormComp from "./FormComp";
 
@@ -17,20 +18,16 @@ const stuff = [
     'class',
     'time'
 ];
-const racers = [];
 
-const RacersDataTab = ({sendDb}) => {
-    const [display, setDisplay] = useState([]);
+const RacersDataTab = ({sendRaceDayStatus}) => {
     function sendToDb() {
-        sendDb(racers);
     }
 
     const formSubmit = event => {
         event.preventDefault();
 
         const form = event.target;
-        const data = {
-        };
+        const data = {};
 
         for (let item of form) {
             data[item.id] = item.value;
@@ -40,21 +37,12 @@ const RacersDataTab = ({sendDb}) => {
             if (!data['date']) delete data['date'];
         }
 
-        racers.push(data);
-        // console.log(data);
-
-        let toDisplay = racers.map(obj => JSON
-            .stringify(obj)
-            .replaceAll('",', '"\n')
-            .replaceAll('"}', '"}\n\n'));
-
-        setDisplay(prev => toDisplay);
-
-        // for (let item of form) {
-        //     if (item.type === 'text') item.value = '';
-        // }
-
         return false;
+    };
+
+    const chkbx = event => {
+        const data = {raceDayStatus: event.target.checked};
+        sendRaceDayStatus(data);
     };
 
     return (
@@ -64,10 +52,11 @@ const RacersDataTab = ({sendDb}) => {
                 <button className={admin.button}>добавить</button>
             </form>
 
-            <aside id={admin.pilotsArr}>
-                <div id={admin.jsonMonitor}>{display}</div>
-                <button className={admin.button} onClick={sendToDb}>отправить</button>
-            </aside>
+            <div className={admin.racemodeBlock}>
+                <input type="checkbox" id={admin.racemodeCheckbox} value="true" onChange={chkbx}/>
+                <span className={admin.racemodeTitle}>Гинка</span>
+                <label htmlFor={admin.racemodeCheckbox} className={admin.racemodeSwitch}> <span className={admin.rmsCaret}></span> </label>
+            </div>
         </section>
     );
 };

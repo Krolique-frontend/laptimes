@@ -1,0 +1,26 @@
+.main {
+  background: #0a335c;
+  color: #d6d9e2;
+  padding: 10px 15px 40px;
+}
+.main .title_h2 {
+  text-align: center;
+  padding: 15px 0;
+}
+.main .title_h4 {
+  margin-bottom: 5px;
+}
+.main .list {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+.main .uList {
+  list-style: initial;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+.main i {
+  display: block;
+  margin-bottom: 10px;
+}
+/*# sourceMappingURL=Regl.module.css.map */

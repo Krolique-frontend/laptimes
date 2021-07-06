@@ -46,6 +46,7 @@
     top: 0;
     background: #363636;
     align-items: flex-start;
+    justify-content: flex-start;
     width: 20%;
     height: 100vh;
     padding: 20px 5px;
@@ -90,11 +91,14 @@
   }
 }
 .menu .menuItem .list {
-  display: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   position: absolute;
-  right: 80px;
-  top: -5px;
-  width: max-content;
+  right: 0;
+  bottom: 0;
+  transform: translate(150%, 0px);
+  width: 90vw;
   transition: all 0.3s ease-in-out;
 }
 @media (min-width: 992px) {
@@ -107,11 +111,42 @@
     flex-direction: column;
   }
 }
+.menu .menuItem .list .switch {
+  background: grey;
+  padding: 15px 20px;
+  margin: 2px 0;
+  border-radius: 50px;
+  background: #fffacd;
+  transition: all 10ms ease-in-out;
+  color: #000;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  margin-top: 10px;
+}
+.menu .menuItem .list .switch:active {
+  outline: none;
+  border: none;
+  transform: scale(0.98);
+}
+@media (min-width: 992px) {
+  .menu .menuItem .list .switch {
+    background: aliceblue;
+    color: #000;
+    font-weight: bold;
+    border-radius: unset;
+    padding: 7px 20px;
+    width: 100%;
+    text-align: left;
+  }
+}
 .menu .menuItem .list .item {
   display: flex;
-  margin: 0 5px;
+  margin: 5px 0;
   background: transparent;
-  color: #000;
+  color: #fff;
   transition: all 0.1s;
 }
 @media (min-width: 992px) {
@@ -151,9 +186,16 @@
     background: transparent;
   }
 }
+.menu .menuItem .list .dateItem {
+  width: 100%;
+  background: #fffacd;
+  color: #1c4b82;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 5px;
+}
 .menu .menuItem .showList {
-  display: flex;
-  /*transform: matrix(1, 0, 0, 1, 0, 0);*/
+  transform: translate(-116%, 0px);
 }
 .menu .menuItem .menuLink {
   display: block;
@@ -227,6 +269,39 @@
 @media (min-width: 992px) {
   .menuButton {
     display: none;
+  }
+}
+.alert {
+  background: #fffacd;
+  box-shadow: 0 0 20px 5px #000;
+  width: 230px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  border-radius: 4px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transition: all 0.3s linear;
+  transform: translate(-50%, -200%);
+}
+.alert.showAlert {
+  animation: showAlert;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+}
+@keyframes showAlert {
+  0% {
+    transform: translate(-50%, -200%);
+  }
+  7% {
+    transform: translate(-50%, 70%);
+  }
+  93% {
+    transform: translate(-50%, 70%);
+  }
+  100% {
+    transform: translate(-50%, -200%);
   }
 }
 /*# sourceMappingURL=Menu.module.css.map */

@@ -26,7 +26,7 @@
 @media (min-width: 992px) {
   .table {
     max-width: 600px;
-    max-height: 95vh;
+    max-height: 93vh;
     overflow: auto;
     margin: auto;
   }

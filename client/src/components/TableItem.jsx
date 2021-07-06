@@ -1,26 +1,31 @@
+import {useRef} from 'react';
 import ti from './TableItem.module.css';
 
 const TableItem = ({data}) => {
-    data.make = data.make.toLowerCase();
+    data.make = data.make.toUpperCase();
 
-    function toggleSpecs(event) {
-        if (event.target.tagName !== 'LI') return;
+    const dropDown = useRef(null);
+    const arrow = useRef(null);
 
-        const list = event.target.children[2];
-
-        event.target.classList.toggle(ti.altAfter);
-        list.classList.toggle(ti.showList);
+    function toggleSpecs() {
+        arrow.current.classList.toggle(ti.flip);
+        dropDown.current.classList.toggle(ti.showList);
     }
 
     return (
-        <li className={ti.tableItem} onClick={toggleSpecs}>
+        <li className={ti.tableItem}>
             <div className={`${ti.tableItem__nameNtime} flexRow`}>
                 <span className={ti.pilot}>{data.pilot}</span>
                 <span className={ti.time}>{data.time}</span>
             </div>
+
             <span className={ti.car}>{data.make} {data.model}</span>
 
-            <div className={ti.dropdownSpecs}>
+            <span className={ti.arrow} onClick={toggleSpecs} ref={arrow}>
+                <img src="img/arrow.svg" alt="arrow img"/>
+            </span>
+
+            <div className={ti.dropdownSpecs} ref={dropDown}>
 
                 <p className={`${ti.dropdownItem} flexRow`}>
                     <span className={ti.dropdown__span}>Когда:</span>
@@ -62,7 +67,6 @@ const TableItem = ({data}) => {
                     <span className={ti.dropdown__span}>{data.drivetrain}</span>
                 </p>
             </div>
-
         </li>
     );
 }

@@ -7,5 +7,6 @@ export const AuthContext = createContext({
     userLogin: null,
     login: noop,
     logout: noop,
-    isAuthenticated: false
+    isAuthenticated: false,
+    raceDay: false
 });

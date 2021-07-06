@@ -3,7 +3,9 @@ const dotenv = require('dotenv').config();
 
 class DbConfig {
     constructor() {
-        this.connConfig = JSON.parse(process.env.DBCONFIG);
+        process.env.NODE_ENV === 'development'
+            ? this.connConfig = JSON.parse(process.env.DBCONFDEV)
+            : this.connConfig = JSON.parse(process.env.DBCONFPROD);
     }
 
     selectString(table, selectRow, selectValue) {
