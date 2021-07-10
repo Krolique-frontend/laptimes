@@ -1,29 +1,44 @@
 .pilot {
   margin: 10px;
-  display: grid;
-  grid-template-columns: 5% 35% 15% 15% 30%;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
   border-bottom: 1px solid grey;
   background: #0a335c;
   color: #fff;
 }
+.pilot .number {
+  flex: 0 1 5%;
+}
+.pilot .name {
+  flex: 0 1 50%;
+}
+.pilot .car {
+  flex: 0 1 30%;
+}
 .pilot .inputs {
   display: inline-block;
+  margin-top: 10px;
 }
 .pilot .inputs label {
   margin-right: 5px;
   margin-bottom: 10px;
+  vertical-align: super;
 }
 .pilot .inputs input {
-  margin-bottom: 10px;
+  margin: 0 20px 10px;
   display: inline-block;
+  width: 20px;
+  height: 20px;
 }
-.pilot .times {
+.pilot .time {
   display: flex;
-  flex-direction: column;
   width: 100%;
+  justify-content: center;
 }
-.pilot .times .time {
-  margin-bottom: 5px;
+.pilot .time input {
+  margin: 5px 0;
   padding: 5px;
+  font-size: 20px;
 }
 /*# sourceMappingURL=racer.module.css.map */

@@ -13,7 +13,7 @@ router.get('/:pathname', async (req, res) => {
     try {
         const query = url.parse(req.url, true).query;
         const pathname = req.params.pathname ? req.params.pathname : null;
-        console.log(pathname);
+        console.log('tables.riytes.js: request param -', pathname);
         let field, fieldValue;
 
         if (!!Object.keys(query).length) {
@@ -31,17 +31,26 @@ router.get('/:pathname', async (req, res) => {
 
         else if (pathname === 'track') {
             if (fieldValue === 'nikoring') fieldValue = "никоринг";
-            else if (fieldValue === '6km') fieldValue = '6km Classic';
+            else if (fieldValue === '6km') fieldValue = '6km';
+            console.log('tables.routes:35', query, field, fieldValue)
 
             const data = await fetchData(field, fieldValue);
+
+            console.log('tables.routes:39', data);
 
             return res.status(200).json(data);
         }
 
-        else if (pathname === 'pilotsadmin' || 'pilotslist') return res.status(200).json(todayDb);
+        else if (pathname === 'pilotsadmin' || 'pilotslist') {
+            todayDb.forEach(el => {
+               if (typeof el.times !== 'object') el.times = [];
+            });
+            return res.status(200).json(todayDb);
+        }
 
         // console.log(`get request with params ${field} ${fieldValue}`);
     } catch (e) {
+        console.log(e);
         res.status(500).json({message: "Request error, try again maybe", e});
     }
 });

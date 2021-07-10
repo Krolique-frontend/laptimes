@@ -4,12 +4,13 @@ const DbConfig = require('./dbConfig');
 async function fetchData(f, v) {
     try {
         let field = f ? f : 'track';
-        let value = v ? v : '6km Classic';
+        let value = v ? v : '6km';
         let table = 'alltimes';
+        console.log('fetchtable.js:9', field, value)
 
-        const data = new DbConfig().selectString(table, field, value);
+        const data = new DbConfig().selectLike(table, field, value);
         const connConf = new DbConfig().connConfig;
-        // console.log('fetchTable() data:', data);
+        console.log('fetchTable() data:', data);
 
         const connection = await mysql2.createConnection(connConf);
         const [rows] = await connection.execute(data);

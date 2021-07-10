@@ -10,8 +10,8 @@ const Racer = ({pilot}) => {
 
     return (
         <div className={racer.pilot}>
-            <span>{pilot.number}</span>
-            <span>{pilot.pilot}</span>
+            <span className={racer.number}>{pilot.number}</span>
+            <span className={racer.name}>{pilot.pilot}</span>
             <span className={racer.car}>{pilot.model}</span>
 
             <div className={racer.inputs}>
@@ -41,33 +41,12 @@ const Racer = ({pilot}) => {
                 </div>
             </div>
 
-            <div className={racer.times}>
+            <div className={racer.time}>
                 <input
                     type="text"
-                    className={racer.time}
-                    name='time1'
+                    name='time'
                     data-name={pilot.pilot}
-                    placeholder='время1'
-                    maxLength="8"
-                    onInput={timeInputHandler}
-                />
-
-                <input
-                    type="text"
-                    className={racer.time}
-                    name='time2'
-                    data-name={pilot.pilot}
-                    placeholder='время2'
-                    maxLength="8"
-                    onInput={timeInputHandler}
-                />
-
-                <input
-                    type="text"
-                    className={racer.time}
-                    name='time3'
-                    data-name={pilot.pilot}
-                    placeholder='лучшее'
+                    placeholder='время'
                     maxLength="8"
                     onInput={timeInputHandler}
                 />

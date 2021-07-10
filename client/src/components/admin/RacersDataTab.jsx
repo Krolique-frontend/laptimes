@@ -4,9 +4,6 @@ import admin from "../../pages/admin.module.css";
 import FormComp from "./FormComp";
 
 const stuff = [
-    'date',
-    'event',
-    'track',
     'number',
     'pilot',
     'make',
@@ -15,11 +12,10 @@ const stuff = [
     'aspiration',
     'drivetrain',
     'tyre',
-    'class',
-    'time'
+    'class'
 ];
 
-const RacersDataTab = ({sendRaceDayStatus}) => {
+const RacersDataTab = ({addNewRacer}) => {
     function sendToDb() {
     }
 
@@ -37,25 +33,44 @@ const RacersDataTab = ({sendRaceDayStatus}) => {
             if (!data['date']) delete data['date'];
         }
 
+        // console.log({addRacer: true ,...data});
+        addNewRacer({addRacer: true, ...data});
         return false;
     };
 
     const chkbx = event => {
         const data = {raceDayStatus: event.target.checked};
-        sendRaceDayStatus(data);
+        // addNewRacer(data);
     };
 
     return (
         <section id={admin.racersData}>
-            <form id={admin.racerForm} onSubmit={formSubmit} name="racerAdminka">
+            <form
+                id={admin.racerForm}
+                onSubmit={formSubmit}
+                name="racerAdminka"
+            >
                 {stuff.map(elem => <FormComp key={elem} props={elem} />)}
+
                 <button className={admin.button}>добавить</button>
             </form>
 
             <div className={admin.racemodeBlock}>
-                <input type="checkbox" id={admin.racemodeCheckbox} value="true" onChange={chkbx}/>
+                <input
+                    type="checkbox"
+                    id={admin.racemodeCheckbox}
+                    value="true"
+                    onChange={chkbx}
+                />
+
                 <span className={admin.racemodeTitle}>Гинка</span>
-                <label htmlFor={admin.racemodeCheckbox} className={admin.racemodeSwitch}> <span className={admin.rmsCaret}></span> </label>
+
+                <label
+                    htmlFor={admin.racemodeCheckbox}
+                    className={admin.racemodeSwitch}
+                >
+                    <span className={admin.rmsCaret}></span>
+                </label>
             </div>
         </section>
     );

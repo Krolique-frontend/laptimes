@@ -1,5 +1,6 @@
 const sqlQueries = {
     select: `SELECT * FROM [table] WHERE [selectrow] in ("[fieldValue]")`,
+    selectWhereLike: `SELECT * FROM [table] WHERE [selectrow] LIKE ("%[like]%")`,
     select6km: `SELECT * FROM alltimes WHERE [selectrow] in ("[fieldValue]")`,
     selectDefault: `SELECT * FROM alltimes`,
     insert: `INSERT INTO alltimes (date, event, track, pilot, make, model, engine, aspiration, drivetrain, tyre, class, time) 

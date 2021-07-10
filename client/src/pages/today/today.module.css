@@ -17,4 +17,9 @@
   background: #fffacd;
   text-align: center;
 }
+@media (min-width: 992px) {
+  .table .header {
+    max-width: 750px;
+  }
+}
 /*# sourceMappingURL=today.module.css.map */

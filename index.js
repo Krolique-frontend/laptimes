@@ -10,7 +10,6 @@ const config = require('config');
 const cors = require('cors');
 const path = require('path');
 const wss = new Socket.Server({server});
-const checkData = require('./utils/checkData');
 
 app.use(express.json({extended: true}));
 app.use(cors());
@@ -35,24 +34,25 @@ wss.on('connection', function connection(ws) {
 
         const statusData = JSON.parse(msg);
 
-        if (statusData.hasOwnProperty('raceDayStatus')) {
-            fs.writeFile('todayDB/raceDayStatus.json', msg, (result)=> console.log(result));
+        if (JSON.parse(msg).hasOwnProperty('addRacer')) {
+            jsonDB.push(JSON.parse(msg));
+            fs.writeFile('todayDB/todayPilots.json', jsonDB, (result) => console.log(result));
             return;
         }
 
-        jsonDB.forEach(obj => {
-            obj['status'] = statusData.find(el => {
-                return el.name === obj.pilot ? el.status : null;
-            });
-            if (obj.status) obj.status = obj.status.status;
-        });
+        if (statusData.hasOwnProperty('raceDayStatus')) {
+            fs.writeFile('todayDB/raceDayStatus.json', msg, (result) => console.log(result));
+            return;
+        }
 
-        statusData.forEach(obj => {
-            if (obj.times) {
-                jsonDB.forEach(el => {
-                    if (el.pilot === obj.name) el['times'] = obj.times;
-                });
-            }
+        statusData.forEach(item => {
+            if (item.status) jsonDB.find(el => {
+                if (el.pilot === item.name) el.status = item.status;
+            });
+
+            if (item.time) jsonDB.find(el => {
+                if (el.pilot === item.name) el.times.push(item.time);
+            });
         });
 
         jsonDB.sort((a, b) => a.number < b.number);

@@ -23,41 +23,27 @@ export function Today() {
         try {
             const data = await request(listUrl, 'GET', null);
             setList(data);
+            console.log(list);
         } catch (e) {
-            console.log(JSON.stringify(e));
+            console.log('ERROR', e);
         }
     }, [request]);
 
     useEffect(() => getList(), [getList]);
 
-    // socket.addEventListener('message', function (event) {
-    //     // console.log('Message from server ', JSON.parse(event.data));
-    //
-    //     if (event.data === '[object Event]') return;
-    //     else {
-    //         let temp = JSON.parse(event.data);
-    //         setList(temp);
-    //     }
-    // });
-
     ws.onmessage = socket.message(setList);
-
-    const startDemo = () => {
-        const demo = JSON.stringify({demo: 'start'});
-        // socket.send(demo);
-    };
 
     return (
         <div className={today.table}>
+            {/*<h2 className={today.title}>Race Of Masters {new Date().toLocaleDateString()}</h2>*/}
             <header className={today.header}>
                 <span className={today.h__item}>№</span>
                 <span className={today.h__item}>имя</span>
                 <span className={today.h__item}>статус</span>
                 <span className={today.h__item}>времена</span>
             </header>
-            {list.map(el => <Pilot key={el.number} list={el}/>)}
 
-            {/*<button className={today.demoButton} onClick={startDemo}>demo</button>*/}
+            {list.map(el => <Pilot key={el.number} list={el}/>)}
 
             <Menu racemode={true}/>
         </div>

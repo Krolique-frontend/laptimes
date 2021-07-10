@@ -61,10 +61,10 @@ export const AdminPage = () => {
                 </Route>
 
                 <Route path="/admin/racersData">
-                    <RacersDataTab sendRaceDayStatus={sendData}/>
+                    <RacersDataTab addNewRacer={sendData}/>
                 </Route>
 
-                <Redirect to="/admin/racersData"/>
+                <Redirect to="/admin/status"/>
             </Switch>
         </Router>
     );

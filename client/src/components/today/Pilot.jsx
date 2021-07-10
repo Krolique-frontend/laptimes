@@ -33,9 +33,6 @@ const Pilot = ({list}) => {
             </span>
 
             <span className={style.times}>
-                <span className={style.time}>00:55:99</span>
-                <span className={style.time}>00:55:99</span>
-                <span className={style.time}>00:55:99</span>
                 {
                     list.times
                         ? list.times.map(time => <span className={style.time}>{time}</span>)

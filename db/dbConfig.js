@@ -28,6 +28,17 @@ class DbConfig {
         } else return sqlQueries.selectDefault;
     }
 
+    selectLike(table, selectRow, like) {
+        this._table = table;
+        this._selectRow = selectRow;
+        this._like = like;
+
+        return sqlQueries.selectWhereLike
+            .replace('[table]', this._table)
+            .replace('[selectrow]', this._selectRow)
+            .replace('[like]', this._like);
+    }
+
     updateString(value, newRow, newValue) {
         this._newRow = newRow;
         this._newValue = newValue;

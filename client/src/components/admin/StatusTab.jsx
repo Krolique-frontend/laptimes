@@ -3,6 +3,7 @@ import styles from "./statusTab.module.css";
 import Racer from "./Racer";
 
 const StatusTab = ({list, sendWs}) => {
+    console.log(list);
 
     const wsSubmit = event => {
         event.preventDefault();
@@ -12,15 +13,18 @@ const StatusTab = ({list, sendWs}) => {
 
         for (let item of form) {
             if (item.checked) data.push({name: item.name, status: item.value});
-            // item.checked === true ? data.push({name: item.name, status: item.value}) : null;
-            if (item.type === 'text' && item.value !== '') {
-                data.find(el => {
+            else if (item.name === 'time' && item.value !== '') {
+                if (!data.find(el => el.name === item.dataset.name)) data.push({
+                    name: item.dataset.name,
+                    time: item.value
+                });
+
+                else data.find(el => {
                     if (el.name === item.dataset.name) {
                         const timesArr = item.parentNode.childNodes;
-                        el['times'] = [];
 
                         timesArr.forEach(child => child.value !== ''
-                            ? el.times.push(child.value)
+                            ? el['time'] = child.value
                             : null
                         );
 
@@ -29,6 +33,8 @@ const StatusTab = ({list, sendWs}) => {
                 });
             }
         }
+
+        console.log(data);
 
         sendWs(data);
         return false;

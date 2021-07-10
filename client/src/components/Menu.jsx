@@ -4,7 +4,7 @@ import {useHttp} from "../hooks/http.hook";
 import {Filters} from "./Filters";
 import About from "./About";
 
-const Menu = ({racemode, toMain}) => {
+const Menu = ({racemode, raceDay, toMain}) => {
     // const dates = props.dates;
     const {request} = useHttp();
     const [filtersArr, setFilters] = useState([]);
@@ -33,7 +33,7 @@ const Menu = ({racemode, toMain}) => {
             toMain(data);
             toggleMenu();
         } catch (e) {
-            console.log('eroor happened', JSON.stringify(e));
+            console.log('eroor happened', e);
         }
     };
 
@@ -45,7 +45,7 @@ const Menu = ({racemode, toMain}) => {
     }
 
     const todayHandler = event => {
-        if (!racemode) {
+        if (!raceDay) {
             event.preventDefault();
             showAlert();
         }
