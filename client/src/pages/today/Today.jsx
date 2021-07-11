@@ -23,7 +23,6 @@ export function Today() {
         try {
             const data = await request(listUrl, 'GET', null);
             setList(data);
-            console.log(list);
         } catch (e) {
             console.log('ERROR', e);
         }
