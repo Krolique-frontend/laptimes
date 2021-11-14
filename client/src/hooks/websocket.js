@@ -1,7 +1,7 @@
 export default class Socket {
     constructor() {
-        // this.url = 'ws://localhost:3001/'; //dev
-        this.url = 'ws://localhost:3030/'; //prod
+        this.url = 'ws://localhost:3001/'; //dev
+        // this.url = 'ws://35.195.249.169:8080/'; //prod
     }
 
     connect() {
