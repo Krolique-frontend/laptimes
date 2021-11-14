@@ -80,5 +80,5 @@ const PORT = config.get('port') || 3001;
 server.listen(PORT, (err) => {
     if (err) throw err;
     console.log(`server running at port ${PORT}...`);
-    // console.log('index.js:83 - process.env.NODE_ENV', process.env.NODE_ENV);
+    //console.log('index.js:83 - process.env.NODE_ENV', process.env.NODE_ENV);
 });

@@ -5,7 +5,7 @@ class DbConfig {
     constructor() {
         process.env.NODE_ENV === 'development'
             ? this.connConfig = JSON.parse(process.env.DBCONFDEV)
-            : this.connConfig = JSON.parse(process.env.DBCONFPROD);
+            : this.connConfig = JSON.parse(process.env.DBCONFIG);
     }
 
     selectString(table, selectRow, selectValue) {

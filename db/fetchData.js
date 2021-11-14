@@ -11,6 +11,7 @@ async function fetchData(f, v) {
         const data = new DbConfig().selectLike(table, field, value);
         const connConf = new DbConfig().connConfig;
         console.log('fetchTable() data:', data);
+	console.log('conn config', connConf);
 
         const connection = await mysql2.createConnection(connConf);
         const [rows] = await connection.execute(data);

@@ -1,5 +1,5 @@
 {
-  "port": 8080,
+  "port": 3030,
   "jwtSecret": "krolique loves opels",
-  "baseUrl": "http://localhost:8080/"
+  "baseUrl": "http://localhost:3030/"
 }
