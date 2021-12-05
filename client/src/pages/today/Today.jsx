@@ -9,50 +9,46 @@ import Socket from "../../hooks/websocket";
 const socket = new Socket();
 let ws = socket.connect();
 ws.onopen = socket.open();
-ws.onclose = function(){
-    ws = socket.connect();
-    ws.onopen = socket.open();
+ws.onclose = function () {
+  ws = socket.connect();
+  ws.onopen = socket.open();
 };
 
-export function Today() {
-    const listUrl = '/api/tables/pilotslist';
-    const raceDayRequest = '/api/tables/raceDayStatus';
+export function Today(raceMode) {
+  const listUrl = '/api/tables/pilotslist';
 
-    const {request} = useHttp();
-    const [list, setList] = useState([]);
-    const [raceMode, setRaceMode] = useState([false]);
-    const getList = useCallback(async () => {
-        try {
-            const raceDayReq = await request(raceDayRequest, 'GET', null);
-            console.log('checkraceDay request >>>', raceDayReq)
-            setRaceMode(raceDayReq);
-            console.log('receMode >>>', raceMode)
-            const data = await request(listUrl, 'GET', null);
-            setList(data);
-        } catch (e) {
-            console.log('ERROR', e);
-        }
-    }, [request]);
+  const {request} = useHttp();
+  const [list, setList] = useState([]);
+  const getList = useCallback(async () => {
+    try {
+      const data = await request(listUrl, 'GET', null);
+      console.log('pilots list data >>>', data)
+      setList(data);
 
-    useEffect(async () => await getList(), [getList]);
+    } catch (e) {
+      console.log('ERROR', e);
+    }
+  }, [request]);
 
-    ws.onmessage = socket.message(setList);
+  useEffect(async () => await getList(), [getList]);
 
-    return (
-        <div className={today.table}>
-            {/*<h2 className={today.title}>Race Of Masters {new Date().toLocaleDateString()}</h2>*/}
-            <header className={today.header}>
-                <span className={today.h__item}>№</span>
-                <span className={today.h__item}>имя</span>
-                <span className={today.h__item}>статус</span>
-                <span className={today.h__item}>времена</span>
-            </header>
+  ws.onmessage = socket.message(setList);
 
-            {list.map(el => <Pilot key={el.number} list={el}/>)}
+  return (
+    <div className={today.table}>
+      {/*<h2 className={today.title}>Race Of Masters {new Date().toLocaleDateString()}</h2>*/}
+      <header className={today.header}>
+        <span className={today.h__item}>№</span>
+        <span className={today.h__item}>имя</span>
+        <span className={today.h__item}>статус</span>
+        <span className={today.h__item}>времена</span>
+      </header>
 
-            <Menu racemode={true}/>
-        </div>
-    );
+      {list.map(el => <Pilot key={el.number} list={el}/>)}
+
+      <Menu racemode={raceMode}/>
+    </div>
+  );
 }
 
 // export  Today;

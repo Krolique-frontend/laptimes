@@ -1,7 +1,6 @@
 const {Router} = require('express');
 const url = require('url');
 const fs = require('fs/promises');
-const path = require('path');
 const router = Router();
 const fetchData = require('../db/fetchData');
 const addNewData = require('../db/addNewData');
@@ -24,35 +23,35 @@ router.get('/:pathname', async (req, res) => {
             }
         }
 
-        if (pathname === 'initialtable') {
-            const data = await fetchData(field, fieldValue);
+        switch (pathname) {
+            case 'initialtable':
+                const data = await fetchData(field, fieldValue);
+                console.log('sending iintial table.........')
+                return res.status(200).json(data);
+            case 'track': {
+                if (fieldValue === 'nikoring') fieldValue = "никоринг";
+                else if (fieldValue === '6km') fieldValue = '6km';
+                console.log('tables.routes:35', query, field, fieldValue)
 
-            return res.status(200).json(data);
-        }
-
-        else if (pathname === 'track') {
-            if (fieldValue === 'nikoring') fieldValue = "никоринг";
-            else if (fieldValue === '6km') fieldValue = '6km';
-            console.log('tables.routes:35', query, field, fieldValue)
-
-            const data = await fetchData(field, fieldValue);
-
-            console.log('tables.routes:39', data);
-
-            return res.status(200).json(data);
-        }
-
-        else if (pathname === 'pilotsadmin' || 'pilotslist') {
-            todayDb.forEach(el => {
-               if (typeof el.times !== 'object') el.times = [];
-            });
-            return res.status(200).json(todayDb);
-        }
-        else if (pathname === 'raceDayStatus') {
-            console.log('raceDayStatus request')
-            const raceDateState = require('../todayDB/raceDayStatus.json');
-            console.log('raceDateState >>>', raceDateState)
-            return res.status(200).json(raceDateState);
+                const data = await fetchData(field, fieldValue);
+                // console.log('tables.routes:39', data);
+                console.log('sending track.........')
+                return res.status(200).json(data);
+            }
+            case 'pilotsadmin':
+                todayDb.forEach(el => {
+                    if (typeof el.times !== 'object') el.times = [];
+                });
+                return res.status(200).json(todayDb);
+            case 'pilotslist':
+                todayDb.forEach(el => {
+                    if (typeof el.times !== 'object') el.times = [];
+                });
+                return res.status(200).json(todayDb);
+            case 'raceDayStatus':
+                console.log('raceDayStatus request')
+                console.log('raceDateState >>>', raceDateState)
+                return res.status(200).json(raceDateState);
         }
 
         // console.log(`get request with params ${field} ${fieldValue}`);

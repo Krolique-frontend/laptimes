@@ -7,15 +7,18 @@ import Menu from "../components/Menu";
 
 export const Main = () => {
     const {request} = useHttp();
-    const fetchPath = 'initialtable';
+    const raceDayRequest = '/api/tables/raceDayStatus';
     const [table, setTable] = useState([]);
+    const [raceMode, setRaceMode] = useState(false);
 
     const [tableHeader, setTableHeader] = useState(`6km classic - все даты`);
-    const [filtersData, setFiltersData] = useState([]);
 
     const getData = useCallback(async () => {
         try {
+            const raceDayReq = await request(raceDayRequest, 'GET', null);
+            if (raceDayReq.hasOwnProperty('raceDayStatus')) setRaceMode(raceDayReq.raceDayStatus);
             const data = await request(`/api/tables/initialtable`, "GET", null);
+            // console.log('data >>>', data)
             setTable(data);
         } catch (e) {
             console.log(JSON.stringify(e));
@@ -56,7 +59,7 @@ export const Main = () => {
                 {table.map((elem) => <TableItem key={elem.id} data={elem}/>)}
             </ul>
 
-            <Menu raceDay={true} toMain={fromMenu}/>
+            <Menu raceDay={raceMode} toMain={fromMenu}/>
         </div>
     );
 };

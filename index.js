@@ -41,7 +41,7 @@ wss.on('connection', function connection(ws) {
         }
 
         if (statusData.hasOwnProperty('raceDayStatus')) {
-            fs.writeFile('todayDB/raceDayStatus.json', msg, (result) => console.log(result));
+            fs.writeFileSync('todayDB/raceDayStatus.json', msg);
             return;
         }
 

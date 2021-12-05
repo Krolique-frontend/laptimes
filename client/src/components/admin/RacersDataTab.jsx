@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useHttp} from '../../hooks/http.hook';
 import admin from "../../pages/admin.module.css";
 import FormComp from "./FormComp";
@@ -16,9 +16,18 @@ const stuff = [
 ];
 
 const RacersDataTab = ({addNewRacer, switchRaceDay}) => {
-    function sendToDb() {
-    }
-
+    const {request} = useHttp();
+    const raceDayUrl = '/api/tables/raceDayState'
+    const [raceDayState, setRaceDayState] = useState(false);
+    const setRaceDay = useCallback(async () => {
+        try {
+            const raceDayReq = await request(raceDayUrl, 'GET', null);
+            console.log('raceDayReq >>>>', raceDayReq)
+            if (raceDayReq.hasOwnProperty('raceDayStatus')) setRaceDayState(raceDayReq.raceDayStatus);
+        } catch (e) {
+            console.log(JSON.stringify(e));
+        }
+    }, [request]);
     const formSubmit = event => {
         event.preventDefault();
 
@@ -38,11 +47,14 @@ const RacersDataTab = ({addNewRacer, switchRaceDay}) => {
         return false;
     };
 
-    const raceDayState = event => {
+    const switchRaceDayState = event => {
         const data = {raceDayStatus: event.target.checked};
         switchRaceDay(data);
-        // console.log(data)
+        console.log(data)
     };
+
+    useEffect(async () => await setRaceDay(), [setRaceDay])
+    console.log('raceDayState >>>', raceDayState)
 
     return (
         <section id={admin.racersData}>
@@ -60,8 +72,8 @@ const RacersDataTab = ({addNewRacer, switchRaceDay}) => {
                 <input
                     type="checkbox"
                     id={admin.racemodeCheckbox}
-                    value="true"
-                    onChange={raceDayState}
+                    value={''+raceDayState}
+                    onChange={switchRaceDayState}
                 />
 
                 <span className={admin.racemodeTitle}>Гинка</span>
@@ -70,7 +82,7 @@ const RacersDataTab = ({addNewRacer, switchRaceDay}) => {
                     htmlFor={admin.racemodeCheckbox}
                     className={admin.racemodeSwitch}
                 >
-                    <span className={admin.rmsCaret}></span>
+                    <span className={admin.rmsCaret}/>
                 </label>
             </div>
         </section>
