@@ -113,14 +113,14 @@ const Menu = ({raceDay, toMain}) => {
           >
             фильтры
           </button>
-          <form className={menu.list} id="event">
-            <Filters
-              className={menu.item}
-              filters={filtersArr}
-            />
+          {/*<form className={menu.list} id="event">*/}
+          {/*  <Filters*/}
+          {/*    className={menu.item}*/}
+          {/*    filters={filtersArr}*/}
+          {/*  />*/}
 
-            <span className={menu.switch} onClick={toggleSwitch}>X</span>
-          </form>
+          {/*  <span className={menu.switch} onClick={toggleSwitch}>X</span>*/}
+          {/*</form>*/}
         </li>
 
         <li className={menu.menuItem}>
