@@ -8,6 +8,7 @@ const addNewData = require('../db/addNewData');
 const deleteData = require('../db/deleteData');
 const Converter = require('../utils/csvToJSON');
 const todayDb = require('../todayDB/todayPilots.json');
+const raceDateState = require("../todayDB/raceDayStatus.json");
 
 router.get('/:pathname', async (req, res) => {
     try {
@@ -46,6 +47,12 @@ router.get('/:pathname', async (req, res) => {
                if (typeof el.times !== 'object') el.times = [];
             });
             return res.status(200).json(todayDb);
+        }
+        else if (pathname === 'raceDayStatus') {
+            console.log('raceDayStatus request')
+            const raceDateState = require('../todayDB/raceDayStatus.json');
+            console.log('raceDateState >>>', raceDateState)
+            return res.status(200).json(raceDateState);
         }
 
         // console.log(`get request with params ${field} ${fieldValue}`);
@@ -94,6 +101,7 @@ router.post('/:reqPath', async (req, res) => {
                 await deleteData(field, fieldValue);
 
                 res.status(200).json({message: "data deleted... but you better check it"});
+                break;
         }
     } catch (e) {
         console.log(e);

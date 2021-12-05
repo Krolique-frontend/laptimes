@@ -16,11 +16,17 @@ ws.onclose = function(){
 
 export function Today() {
     const listUrl = '/api/tables/pilotslist';
+    const raceDayRequest = '/api/tables/raceDayStatus';
 
     const {request} = useHttp();
     const [list, setList] = useState([]);
+    const [raceMode, setRaceMode] = useState([false]);
     const getList = useCallback(async () => {
         try {
+            const raceDayReq = await request(raceDayRequest, 'GET', null);
+            console.log('checkraceDay request >>>', raceDayReq)
+            setRaceMode(raceDayReq);
+            console.log('receMode >>>', raceMode)
             const data = await request(listUrl, 'GET', null);
             setList(data);
         } catch (e) {
@@ -28,7 +34,7 @@ export function Today() {
         }
     }, [request]);
 
-    useEffect(() => getList(), [getList]);
+    useEffect(async () => await getList(), [getList]);
 
     ws.onmessage = socket.message(setList);
 

@@ -15,7 +15,7 @@ const stuff = [
     'class'
 ];
 
-const RacersDataTab = ({addNewRacer}) => {
+const RacersDataTab = ({addNewRacer, switchRaceDay}) => {
     function sendToDb() {
     }
 
@@ -38,9 +38,10 @@ const RacersDataTab = ({addNewRacer}) => {
         return false;
     };
 
-    const chkbx = event => {
+    const raceDayState = event => {
         const data = {raceDayStatus: event.target.checked};
-        // addNewRacer(data);
+        switchRaceDay(data);
+        // console.log(data)
     };
 
     return (
@@ -60,7 +61,7 @@ const RacersDataTab = ({addNewRacer}) => {
                     type="checkbox"
                     id={admin.racemodeCheckbox}
                     value="true"
-                    onChange={chkbx}
+                    onChange={raceDayState}
                 />
 
                 <span className={admin.racemodeTitle}>Гинка</span>
